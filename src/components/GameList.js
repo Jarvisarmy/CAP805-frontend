@@ -1,33 +1,10 @@
 import React from 'react';
 import GameItem from './GameItem.js';
 import {useState, useEffect} from 'react';
-import constant from './../constant.js';
+import {useContext} from 'react';
+import GameContext from "../context/GameContext";
 const GameList = () => {
-    const [games, setGames] = useState([]);
-    const getAllGames = ()=>{
-        fetch(constant.databaseUrl+'/games')
-        .then(response=>response.json())
-        .then(result=>{
-            console.log(result);
-            setGames(result);
-        })
-        .catch(err=>{
-            console.log(err);
-        });
-    }
-    const deleteGame = (gNum)=>{
-        fetch(constant.databaseUrl+'/games/delete/'+gNum)
-        .then(res=>{
-            
-        })
-        .catch(err=>{
-            console.log(err);
-        });
-        getAllGames();
-    }
-    useEffect(()=>{
-        getAllGames();
-    },[]);
+    const {games,deleteGame} = useContext(GameContext);
     return (
         <section className="game-list-continer">
             {games.map((game)=>{

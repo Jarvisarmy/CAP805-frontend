@@ -1,7 +1,10 @@
 import React from 'react'
 import {useState} from 'react';
 import constant from './../constant.js';
+import {useContext} from 'react';
+import GameContext from "../context/GameContext";
 const AddGame = () => {
+    const {getAllGames} = useContext(GameContext);
     const [gameName, setGameName] = useState("");
     const [gameUrl, setGameUrl] = useState("");
     const [gameDescription, setGameDescription] = useState("");
@@ -18,7 +21,7 @@ const AddGame = () => {
                 gameName: gameName,
                 gameUrl: gameUrl,
                 gameDescription: gameDescription
-            };
+            }; 
             fetch(constant.databaseUrl+'/games/add', {
                 method: 'POST',
                 headers: new Headers({
@@ -31,10 +34,12 @@ const AddGame = () => {
             .catch(err=>{
                 console.log(err);
             });
+            getAllGames();
             // clear the title and description
             setGameName("");
             setGameUrl("");
             setGameDescription("");
+            
         }
     }
     return (
@@ -62,7 +67,7 @@ const AddGame = () => {
                 <span className="error">{errorDescription}</span>
             </div>
             <div className="form-control-container">
-                <button className="btn btn-primary" type="button" onClick={addGame}>Save Game </button>
+                <a type="button" onClick={addGame} href="/">Save Game </a>
             </div>
         </form>
     </section>
