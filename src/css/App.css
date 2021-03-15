@@ -5,3 +5,140 @@
 .grid-col-2 {
     grid-template-columns: 50% 50%;
 }
+
+.grid-col-3
+{
+    grid-template-columns: repeat(3,1fr);
+}
+
+.grid-col-4
+{
+    grid-template-columns: repeat(4,1fr);
+}
+
+
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+#first-section
+{
+
+    height: 30vh;
+    background-image: url("../img/header_image.png");
+    background-size: cover;
+    background-position: center center;
+    
+    
+}
+
+.bannerlabel
+{
+    padding: 16px 32px; 
+     text-align: right;
+     font-size: 32px;
+     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+}
+
+header{
+
+    background-color: rgb(6, 72, 99);
+}
+
+
+header a{
+    text-decoration: none;
+    color:white;
+}
+header>nav li{
+
+   /* display: inline;    */
+    padding: 16px 32px; 
+    display:inline-block;
+}
+li
+{
+    padding: 16px 10px;
+ 
+}
+
+/********************ADD FORM***********************/
+
+.form-control-container
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-control-container label , .form-control-container input 
+{
+    margin-left: 30px;
+    display:block;
+}
+
+.form-control-container label 
+{
+    font-weight: bold;
+}
+.form-control-container a 
+{
+    margin-left: 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.form-control 
+{
+    margin-top: 10px;
+    margin-left: 30px;
+    width:80%;
+    border: 1px solid black;
+    padding:20px;
+}
+input[type=text].form-control
+{
+    height:30px;
+}
+
+textarea.form-control
+{
+    height:150px;
+}
+/************************GAME LIST*******************/
+.game-list-continer
+{
+    margin: 16px ;
+   
+ 
+}
+
+.game-container
+{
+    background-color:rgb(224, 231, 230);
+    margin-bottom: 10px;
+    padding:16px;
+ 
+}
+
+.game-top-area > p
+{
+    font-weight: 900;
+    font-size:calc(1rem + 5px);
+
+}
+
+.game-description
+{
+    font-size:calc(1rem - 2px);
+}
+
+body
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.4rem;
+    font-size: 1.1rem;
+}
+

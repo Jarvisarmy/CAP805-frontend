@@ -42,16 +42,7 @@ function App() {
     return (
         <>
         <GameContext.Provider value={{games, getAllGames, deleteGame, }}>
-            <div>
-                <ul>
-                    <li>
-                        <a href="/"> Public Page</a>
-                    </li>
-                    <li>
-                        <a href="/profilePage"> Profile Page</a>
-                    </li>
-                </ul>
-            </div>
+         
             <Router>
                 <Switch>
                     <Route exact path="/">
