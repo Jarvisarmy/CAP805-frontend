@@ -7,12 +7,14 @@ const GameList = () => {
     const {games,deleteGame} = useContext(GameContext);
     return (
         <>
-      
+       
+     
         <section className="game-list-continer">
              {games.map((game)=>{
                 return <GameItem key={game.gameNum} item={game} onDeleteGame={deleteGame} />
             })}
         </section>
+      
         </>
     )
 }

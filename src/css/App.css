@@ -5,6 +5,9 @@
 .grid-col-2 {
     grid-template-columns: 50% 50%;
 }
+.grid-col-2 {
+    grid-template-columns: 50% 50%;
+}
 
 .grid-col-3
 {
@@ -16,6 +19,9 @@
     grid-template-columns: repeat(4,1fr);
 }
 
+.grid-column-2 {
+    grid-template-columns: repeat(2,1fr);
+}
 
 *
 {
@@ -142,3 +148,18 @@ body
     font-size: 1.1rem;
 }
 
+.categoryBox
+{
+    padding: 16px 30px;     
+   
+    display: block;
+      
+    text-align: center;
+  
+   
+}
+.catogoryName
+  {
+      align-items: center;
+      font-weight: bold;
+  }
