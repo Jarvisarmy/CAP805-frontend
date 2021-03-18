@@ -25,7 +25,6 @@ const filterGames = ()=>{
         <div className="container">       
      
       <span className = "categoryBox"> <img src={props.category.categoryImage} style={{width: "300px",height:"300px"}}  alt=""  onClick={()=>{
-
         
        // filterGames()
         goToGamesPage()

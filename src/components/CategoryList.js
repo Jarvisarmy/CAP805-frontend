@@ -7,7 +7,7 @@ import GameContext from "../context/GameContext";
 const CategoryList = () => {
     const {gameCategory,games,getGamesbyCategory} = useContext(GameContext)
 
-    //alert(JSON.stringify(props.productCategory))
+    
     return (
         <div className="grid grid-column-2">
            

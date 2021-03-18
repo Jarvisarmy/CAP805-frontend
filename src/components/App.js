@@ -22,44 +22,16 @@ import {
 function App() {
     const [games, setGames] = useState([]);
 
-    const gameCategoryInit = [{
-        "id": 1,
-        "categoryName": "Action",
-        "categoryImage": action,
-         
-      },
-      {
-        "id": 2,
-        "categoryName": "Adventure",
-        "categoryImage": adventure,
-       
-      },
-      {
-        "id": 3,
-        "categoryName": "Strategy",
-        "categoryImage": strategy,
-        
-      },
-      {
-        "id": 4,
-        "categoryName": "Shooter",
-        "categoryImage": shooter,
-     
-      }
-    
-    ];
-    const [gameCategory, setGameCategory] = useState(gameCategoryInit);
+   
+    const [gameCategory, setGameCategory] = useState([]);
 
 
     const getGamesbyCategory=(inputCategoryId)=>
-    {
-     // alert("Input CategoryId"+inputCategoryId)
-      let gamesList = games.filter((game)=>{
-      //  alert("Product:"+JSON.stringify(product));
+    {    
+      let gamesList = games.filter((game)=>{     
       return game.categoryId===inputCategoryId
     }
     )
-//alert("Product List"+JSON.stringify(productList))
 return gamesList;
 }
 
@@ -89,7 +61,21 @@ return gamesList;
         getAllGames();
     },[]);
 
-
+    const getAllCategory = ()=>{
+      
+        fetch(constant.databaseUrl+'/categories')
+        .then(response=>response.json())
+        .then(result=>{
+            console.log(result);
+            setGameCategory(result);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
+    useEffect(()=>{
+        getAllCategory();
+    },[]);
  
     return (
         <>
