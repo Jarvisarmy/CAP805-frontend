@@ -65,7 +65,33 @@ li
  
 }
 
+/********************LOGIN FORM***********************/
+.formContainer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:380px;
+    height:450px;
+    border: 1px solid black
+}
+
+.form-control 
+{   
+    margin-top: 10px;
+    margin-left: 30px;
+    align-items:center;
+    justify-content:center;
+    width:80%;
+    border: 1px solid black;
+    padding:20px;
+}
+
+.login-btn{
+    margin-bottom:10px;
+  }
+
 /********************ADD FORM***********************/
+
 
 .form-control-container
 {
@@ -90,14 +116,7 @@ li
     font-size: 18px;
 }
 
-.form-control 
-{
-    margin-top: 10px;
-    margin-left: 30px;
-    width:80%;
-    border: 1px solid black;
-    padding:20px;
-}
+
 input[type=text].form-control
 {
     height:30px;
@@ -142,3 +161,11 @@ body
     font-size: 1.1rem;
 }
 
+.login-btn{
+    margin-top:40px;
+    margin-bottom:10px; 
+}
+
+.loginCenter{
+    justify-items: center;
+}

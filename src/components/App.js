@@ -5,6 +5,7 @@ import GameContext from "../context/GameContext";
 import constant from './../constant.js';
 import PublicPage from './../pages/PublicPage';
 import ProfilePage from './../pages/ProfilePage';
+import LoginPage from './../pages/LoginPage';
 import {
     BrowserRouter as Router,
     Switch,
@@ -50,6 +51,9 @@ function App() {
                     </Route>
                     <Route path="/profilePage">
                         <ProfilePage />
+                    </Route>
+                    <Route path="/loginPage">
+                        <LoginPage />
                     </Route>
                 </Switch>
             </Router>

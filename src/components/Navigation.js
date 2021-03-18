@@ -9,7 +9,7 @@ const Navigation = () => {
         <ul>
             <li><a href="/">Home </a></li>
             <li><a href="/"> Games</a></li>
-            <li><a href="/profilePage">Login/SignUp </a></li>
+            <li><a href="/loginPage">Login/SignUp </a></li>
             <li><a href="">Contact </a> </li>
 
         </ul>

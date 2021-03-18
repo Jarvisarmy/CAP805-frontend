@@ -1,16 +1,15 @@
-
-import GameList from './../components/GameList.js';
+import LogInForm from './../components/LogInForm.js';
 import Header from './../components/Header.js';
 import Navigation from './../components/Navigation.js';
-const PublicPage = (props) => {
+const LoginPage = (props) => {
     
     return (
         <>
         <Header/>
         <Navigation/>
-            <GameList />
+            <LogInForm/> 
         </>
     )
 }
 
-export default PublicPage
+export default LoginPage
