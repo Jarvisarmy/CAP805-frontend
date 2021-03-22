@@ -6,6 +6,7 @@ import constant from './../constant.js';
 import PublicPage from './../pages/PublicPage';
 import ProfilePage from './../pages/ProfilePage';
 import CategoryPage from './../pages/CategoryPage';
+import GamesPage from './../pages/GamesPage';
 
 import action from '../img/action.jpg';
 import adventure from '../img/adventure.jpeg';
@@ -24,7 +25,7 @@ function App() {
 
    
     const [gameCategory, setGameCategory] = useState([]);
-
+    const [filteredGames, setFilteredGames] = useState([]);
 
     const getGamesbyCategory=(inputCategoryId)=>
     {    
@@ -57,6 +58,12 @@ return gamesList;
         getAllGames();
         
     }
+
+    const storeFilteredGames = (filteredGames) => {
+        setFilteredGames(filteredGames);
+      }
+
+
     useEffect(()=>{
         getAllGames();
     },[]);
@@ -79,7 +86,7 @@ return gamesList;
  
     return (
         <>
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,getGamesbyCategory }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames }}>
          
             <Router>
                 <Switch>
@@ -92,6 +99,9 @@ return gamesList;
                     <Route exact path="/categoryPage">
                         <CategoryPage />
                     </Route>
+                    <Route path="/games">
+                    <GamesPage />
+                  </Route>
                 </Switch>
             </Router>
         </GameContext.Provider>

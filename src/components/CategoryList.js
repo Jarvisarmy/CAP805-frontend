@@ -5,20 +5,17 @@ import GameContext from "../context/GameContext";
 
 
 const CategoryList = () => {
-    const {gameCategory,games,getGamesbyCategory} = useContext(GameContext)
+    const {gameCategory,games} = useContext(GameContext)
 
     
     return (
         <div className="grid grid-column-2">
            
                 {gameCategory.map((category) => (<CategoryItem
-                    category={category} games={games} getGamesbyCategory={getGamesbyCategory} >
+                    category={category} games={games} >
                 </CategoryItem>))}
-
-                  </div>
-         
-     
-    )
+                  </div>        
+         )
 }
 
 export default CategoryList

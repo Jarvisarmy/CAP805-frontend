@@ -6,8 +6,7 @@ const GameItem = (props) => {
     
     return (
         <div className="game-container">
-            <div className="grid grid-col-2 game-top-area">
-         
+            <div className="grid grid-col-2 game-top-area">        
       
                 <p className="game-name">
                     {props.item.gameName}
