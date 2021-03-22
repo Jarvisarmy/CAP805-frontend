@@ -4,10 +4,11 @@ import constant from './../constant.js';
 import {useContext} from 'react';
 import GameContext from "../context/GameContext";
 const AddGame = () => {
-    const {getAllGames} = useContext(GameContext);
+    const {getAllGames,gameCategory} = useContext(GameContext);
     const [gameName, setGameName] = useState("");
     const [gameUrl, setGameUrl] = useState("");
     const [gameDescription, setGameDescription] = useState("");
+    const [selectedGameCategory, setSelectedGameCategory] = useState("");
     const [errorName, setErrorName] = useState("");
     const [errorUrl, setErrorUrl] = useState("");
     const [errorDescription, setErrorDescription] = useState("");
@@ -20,8 +21,10 @@ const AddGame = () => {
             const newGame={
                 gameName: gameName,
                 gameUrl: gameUrl,
-                gameDescription: gameDescription
+                gameDescription: gameDescription,
+                categoryId: parseInt(selectedGameCategory)
             }; 
+         
             fetch(constant.databaseUrl+'/games/add', {
                 method: 'POST',
                 headers: new Headers({
@@ -39,6 +42,7 @@ const AddGame = () => {
             setGameName("");
             setGameUrl("");
             setGameDescription("");
+            setSelectedGameCategory("");
             
         }
     }
@@ -58,6 +62,23 @@ const AddGame = () => {
                     setGameUrl(event.target.value);
                 }}/>
                 <span className="error" >{errorUrl}</span>
+            </div>
+            <div className="form-control-container">             
+            <label htmlFor="selectedGameCategory"> Category </label>
+                <select id="selectedGameCategory" className="form-control" onChange={(evt) => {
+            
+                    setSelectedGameCategory(evt.target.value);
+                  }}>
+                    <option>Choose category</option>
+        
+                    {gameCategory.map((category) => (
+        
+                      <option value={category.categoryId} >{category.categoryName} </option>
+                    )
+                    )
+                    }
+                  </select>
+            
             </div>
             <div className = "form-control-container">
                 <label htmlFor="gameDescription"> Description </label>
