@@ -3,7 +3,7 @@
     width: 90%;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 300px 700px;
+    grid-template-rows: 300px 1200px 100px;
     border: 2px solid grey;
     border-radius: 4px;
 }
@@ -12,14 +12,12 @@
     display: grid;
     grid-template-columns: 50% 50%;
     border-bottom: 2px solid grey;
-    height: 100%;
 }
 
 .user-info-detail {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
-    height: 100%;
     padding: 20px;
 }
 .user-info-item {
@@ -29,7 +27,6 @@
 }
 .user-name {
     font-size: 30px;
-    height: 100%;
     padding: 50px 30px;
     align-self: center;
 }
@@ -50,19 +47,31 @@
 .user-games-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 10% 90%;
+    height: 100%;
+}
+.user-games-search {
+    height: 40px;
+    width: 50%;
+    margin: auto;
+    border-radius: 4px;
+    padding-left: 10px;
+    border-width: 1px;
 }
 .user-games-pane {
     display: grid;
     grid-template-columns: 50% 50%;
     
 }
+
 .user-games-pane > div {
     border: 2px solid #aaa;
     border-radius: 4px;
-    margin: 10px;
+    margin: 20px;
     display: grid;
     grid-template-rows: 15% 85%;
+    height: inherit;
+    margin-bottom: 50px;
 }
 .user-game-edit-list-title {
     margin: 10px;
@@ -73,20 +82,13 @@
 .user-game-edit-list-main {
     overflow-y: scroll;
 }
-.user-games-search {
-    height: 40px;
-    width: 50%;
-    margin: auto;
-    border-radius: 4px;
-    padding-left: 10px;
-    border-width: 1px;
-}
+
 .user-game-item {
     border: 1px solid #777;
     border-radius: 5px;
     height: 70px;
     display: grid;
-    grid-template-columns: 60% 20% 20%;
+    grid-template-columns: 50% 25% 25%;
     margin: 10px;
 }
 .user-game-item-name {
@@ -96,13 +98,31 @@
     font-size: 20px;
 }
 .user-game-item-button {
+    align-self: center;
     display: inline-block;
-    padding: 10px;
     border: 1px solid grey;
     margin: 10px;
     border-radius: 10px;
     text-align: center;
+    width: 80px;
+    height: 30px;
+    font-size: 14px;
+    justify-self: center;
 }
 .button-attention {
     border-color: red;
+}
+.add-game-button {
+    display: block;
+    border: 1px solid grey;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    height: 40px;
+    width: 150px;
+    margin: 50px;
+    margin-left: 80%;
+    text-align: center;
+    align-self: center;
+    text-decoration: none;
 }

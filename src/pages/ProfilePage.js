@@ -77,11 +77,13 @@ const ProfilePage = (props) => {
                     <input className="user-games-search" placeholder="Search">
                     </input>
                     <div className="user-games-pane">
-                        <UserGameEditList className="user-games-left-subpane" title="user-review games" lists={fakeGamesList} />
-                        <UserGameEditList className="user-games-right-subpane" title="approved games" lists={fakeGamesList} />
+                        <UserGameEditList title="user-review games" lists={fakeGamesList} />
+                        <UserGameEditList title="approved games" lists={fakeGamesList} />
                     </div>
                 </div>
+                <a className="add-game-button" href="/addGame">Upload game</a>
             </div> 
+            
         </>
     )
 }
