@@ -7,6 +7,7 @@ import PublicPage from './../pages/PublicPage';
 import ProfilePage from './../pages/ProfilePage';
 import CategoryPage from './../pages/CategoryPage';
 import GamesPage from './../pages/GamesPage';
+import AddGame from './../components/AddGame';
 
 import action from '../img/action.jpg';
 import adventure from '../img/adventure.jpeg';
@@ -100,8 +101,11 @@ return gamesList;
                         <CategoryPage />
                     </Route>
                     <Route path="/games">
-                    <GamesPage />
-                  </Route>
+                        <GamesPage />
+                    </Route>
+                    <Route path="/addGame">
+                        <AddGame />
+                    </Route>
                 </Switch>
             </Router>
         </GameContext.Provider>
