@@ -2,53 +2,28 @@ import AddGame from './../components/AddGame.js';
 import Header from './../components/Header.js';
 import Navigation from './../components/Navigation.js';
 import UserGameEditList from './../components/UserGameEditList';
+import constant from './../constant.js';
 import './../css/ProfilePage.css';
+import {useState,useEffect} from 'react';
 
 
 const ProfilePage = (props) => {
+    const [searchInput, setSearchInput] = useState("");
+    const [games,setGames] = useState([]);
     // these is fake lists, will be replaced by the data pulled from database later
-    const fakeGamesList = [
-        {
-            gameNum: 1,
-            gameName: "game1",
-            gameUrl: "game Url",
-            gameDescription: "game description",
-            user_id: 1,
-            category_id: 1
-        },
-        {
-            gameNum: 2,
-            gameName: "game2",
-            gameUrl: "game Url",
-            gameDescription: "game description",
-            user_id: 1,
-            category_id: 1
-        },
-        {
-            gameNum: 3,
-            gameName: "game3",
-            gameUrl: "game Url",
-            gameDescription: "game description",
-            user_id: 1,
-            category_id: 1
-        },
-        {
-            gameNum: 4,
-            gameName: "game4",
-            gameUrl: "game Url",
-            gameDescription: "game description",
-            user_id: 1,
-            category_id: 1
-        },
-        {
-            gameNum: 5,
-            gameName: "game5",
-            gameUrl: "game Url",
-            gameDescription: "game description",
-            user_id: 1,
-            category_id: 1
-        }
-    ]
+    const getGamesByUser = ()=> {
+        fetch(constant.databaseUrl+'/games?user=1')
+        .then(response=>response.json())
+        .then(result=>{
+            setGames(result);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
+    useEffect(()=>{
+        getGamesByUser()
+    },[games]);
     return (
         <>
             <Header/>
@@ -74,11 +49,11 @@ const ProfilePage = (props) => {
                     </div>
                 </div>
                 <div className="user-games-container">
-                    <input className="user-games-search" placeholder="Search">
+                    <input className="user-games-search" placeholder="Search" value={searchInput} >
                     </input>
                     <div className="user-games-pane">
-                        <UserGameEditList title="user-review games" lists={fakeGamesList} />
-                        <UserGameEditList title="approved games" lists={fakeGamesList} />
+                        <UserGameEditList title="user-review games" lists={games} />
+                        <UserGameEditList title="approved games" lists={games} />
                     </div>
                 </div>
                 <a className="add-game-button" href="/addGame">Upload game</a>

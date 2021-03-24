@@ -22,7 +22,9 @@ const AddGame = () => {
                 gameName: gameName,
                 gameUrl: gameUrl,
                 gameDescription: gameDescription,
-                categoryId: parseInt(selectedGameCategory)
+                categoryId: parseInt(selectedGameCategory),
+                // let assume all form is added by user 1 first, we can replace this after finish user cookie
+                userNum: 1
             }; 
          
             fetch(constant.databaseUrl+'/games/add', {

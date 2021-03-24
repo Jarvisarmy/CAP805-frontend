@@ -30,12 +30,11 @@ function App() {
 
     const getGamesbyCategory=(inputCategoryId)=>
     {    
-      let gamesList = games.filter((game)=>{     
-      return game.categoryId===inputCategoryId
+        let gamesList = games.filter((game)=>{     
+            return game.categoryId===inputCategoryId
+        })
+        return gamesList;
     }
-    )
-return gamesList;
-}
 
     const getAllGames = ()=>{
         fetch(constant.databaseUrl+'/games')
@@ -43,6 +42,7 @@ return gamesList;
         .then(result=>{
             console.log(result);
             setGames(result);
+            storeFilteredGames(games);
         })
         .catch(err=>{
             console.log(err);
@@ -82,7 +82,9 @@ return gamesList;
         });
     }
     useEffect(()=>{
+        getAllGames();
         getAllCategory();
+        
     },[]);
  
     return (

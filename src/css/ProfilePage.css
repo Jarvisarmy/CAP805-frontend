@@ -3,7 +3,7 @@
     width: 90%;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 300px 1200px 100px;
+    grid-template-rows: 300px 800px 100px;
     border: 2px solid grey;
     border-radius: 4px;
 }
@@ -70,7 +70,7 @@
     margin: 20px;
     display: grid;
     grid-template-rows: 15% 85%;
-    height: inherit;
+    height: 500px;
     margin-bottom: 50px;
 }
 .user-game-edit-list-title {
