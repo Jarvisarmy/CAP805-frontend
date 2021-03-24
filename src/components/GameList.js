@@ -4,13 +4,13 @@ import {useState, useEffect} from 'react';
 import {useContext} from 'react';
 import GameContext from "../context/GameContext";
 const GameList = (props) => {
-    const {deleteGame} = useContext(GameContext);
+    const {deleteGame,filteredGames} = useContext(GameContext);
     return (
         <>
        
      
         <section className="game-list-continer">
-             {props.list.map((game)=>{
+             {filteredGames.map((game)=>{
                 return <GameItem key={game.gameNum} item={game} onDeleteGame={deleteGame} />
             })}
         </section>
