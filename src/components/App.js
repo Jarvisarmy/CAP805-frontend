@@ -14,6 +14,8 @@ import adventure from '../img/adventure.jpeg';
 import shooter from '../img/shooter.jpg';
 import strategy from '../img/strategy.jpg';
 
+import LoginPage from './../pages/LoginPage';
+import SignUpPage from './../pages/SignUpPage';
 import {
     BrowserRouter as Router,
     Switch,
@@ -36,6 +38,11 @@ function App() {
         return gamesList;
     }
 
+    const [user, setUser] = useState({
+        userName : "",
+        password : "",
+    });
+    
     const getAllGames = ()=>{
         fetch(constant.databaseUrl+'/games')
         .then(response=>response.json())
@@ -75,12 +82,37 @@ function App() {
         .then(response=>response.json())
         .then(result=>{
             console.log(result);
-            setGameCategory(result);
+            setGameCategory(result);})
+            .catch(err=>{
+                console.log(err);
+            });
+        }
+            
+    const userLogin = (user)=>{
+        fetch(constant.databaseUrl+'/loginPage', {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(user)
+        })
+        .then(response=>response.json()).then(result=>{
+            //result = setUser(result);
+            //console.log(result[0]);
+            let userObj = {
+                user: result[0].userName,
+                password: result[0].password
+            }
+            //console.log(userObj)
+            setUser(userObj);
+            console.log(user);
+            //localStorage.setItem(JSON.stringify("user-info", result))
         })
         .catch(err=>{
             console.log(err);
         });
     }
+
     useEffect(()=>{
         getAllGames();
         getAllCategory();
@@ -89,7 +121,7 @@ function App() {
  
     return (
         <>
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, }}>
          
             <Router>
                 <Switch>
@@ -107,6 +139,12 @@ function App() {
                     </Route>
                     <Route path="/addGame">
                         <AddGame />
+                    </Route>
+                    <Route path="/loginPage">
+                        <LoginPage />
+                    </Route>
+                    <Route path="/signupPage">
+                        <SignUpPage />
                     </Route>
                 </Switch>
             </Router>
