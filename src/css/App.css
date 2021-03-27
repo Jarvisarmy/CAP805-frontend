@@ -75,20 +75,24 @@ li
     border: 1px solid black
 }
 
-.form-control 
-{   
-    margin-top: 10px;
-    margin-left: 30px;
-    align-items:center;
-    justify-content:center;
-    width:80%;
-    border: 1px solid black;
-    padding:20px;
+.form-layout{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+
 }
 
 .login-btn{
-    margin-bottom:10px;
-  }
+    display: flex;
+    margin-top:40px;
+    margin-bottom:10px; 
+}
+
+.loginCenter{
+    justify-items: center;
+    margin-bottom: 30px
+}
+
 
 /********************ADD FORM***********************/
 
@@ -161,11 +165,3 @@ body
     font-size: 1.1rem;
 }
 
-.login-btn{
-    margin-top:40px;
-    margin-bottom:10px; 
-}
-
-.loginCenter{
-    justify-items: center;
-}

@@ -1,16 +1,16 @@
-import LogInForm from './../components/LogInForm.js';
+import SignupForm from './../components/SignupForm.js';
 import Header from './../components/Header.js';
 import Navigation from './../components/Navigation.js';
-const LoginPage = (props) => {
+const SignUpPage = (props) => {
     
     return (
         <>
         <Header/>
         <Navigation/>
-            <LogInForm/> 
+            <SignupForm/>
             
         </>
     )
 }
 
-export default LoginPage
+export default SignUpPage
