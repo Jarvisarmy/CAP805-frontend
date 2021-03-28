@@ -8,9 +8,9 @@ const Navigation = () => {
         <nav>
         <ul>
             <li><a href="/">Home </a></li>
-            <li><a href="/categoryPage"> Category</a></li>            
+                    
             <li><a href="/profilePage"> Profile </a></li>
-            <li><a href="/"> Games</a></li>
+            <li><a href="/categoryPage"> Games</a></li>
             <li><a href="/loginPage">Login/SignUp </a></li>
             <li><a href="">Contact </a> </li>
            
