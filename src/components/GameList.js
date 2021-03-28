@@ -11,7 +11,7 @@ const GameList = (props) => {
      
         <section className="game-list-continer">
              {filteredGames.map((game)=>{
-                return <GameItem key={game.gameNum} item={game} onDeleteGame={deleteGame} />
+                return <GameItem key={game.gameNum} item={game}  onDeleteGame={deleteGame} />
             })}
         </section>
       

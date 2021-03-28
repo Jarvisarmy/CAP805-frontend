@@ -19,14 +19,7 @@ const Navigation = () => {
         </div>
         <div>
         <nav>
-        <ul>
-            <li>
-                <a href="/"> Public Page</a>
-            </li>
-            <li>
-                <a href="/profilePage"> Profile Page</a>
-            </li>
-        </ul>
+        
         </nav>
     </div>
         </>
