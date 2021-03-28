@@ -7,6 +7,7 @@ import './../css/ProfilePage.css';
 import {useState,useEffect} from 'react';
 
 
+
 const ProfilePage = (props) => {
     const [searchInput, setSearchInput] = useState("");
     const [games,setGames] = useState([]);
