@@ -7,7 +7,7 @@ import PublicPage from './../pages/PublicPage';
 import ProfilePage from './../pages/ProfilePage';
 import CategoryPage from './../pages/CategoryPage';
 import GamesPage from './../pages/GamesPage';
-import AddGame from './../components/AddGame';
+import AddGamePage from './../pages/AddGamePage';
 
 import action from '../img/action.jpg';
 import adventure from '../img/adventure.jpeg';
@@ -138,7 +138,7 @@ function App() {
                         <GamesPage />
                     </Route>
                     <Route path="/addGame">
-                        <AddGame />
+                        <AddGamePage />
                     </Route>
                     <Route path="/loginPage">
                         <LoginPage />

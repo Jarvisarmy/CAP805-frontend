@@ -110,10 +110,11 @@ li
     margin-bottom: 20px;
 }
 
-.form-control-container label , .form-control-container input 
+.form-control-container label , .form-control-container input , .form-control-container textarea,  .form-control-container select  
 {
     margin-left: 30px;
     display:block;
+    width:70%;
 }
 
 .form-control-container label 
