@@ -216,5 +216,38 @@ body
     padding-bottom: 20px;;
     
  }
- 
+
+ /******************Modal*****************************/
+ .popUp-Modal
+  {
+      position:absolute;
+      top:50%;
+      left: 50px;
+      height:100vh;
+      width:70%;
+      z-index:1;
+      background-color: transparent;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      
+  
+  }
+  .popUp-Modal-container
+  {
+      width:300px;   
+      margin: 0 auto;
+      font-size: 16px;
+      font-weight: bold;
+      font-family: Arial;
+      background-color:white;
+      padding:50px 32px;
+      text-align: center;
+      align-items: center;
+  }
+
+  .hide
+{
+    display:none;
+}
   

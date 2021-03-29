@@ -2,21 +2,25 @@ import React from 'react'
 import { FaWindowClose } from "react-icons/fa";
 import constant from './../constant.js';
 import {useState} from 'react';
+import { useContext } from "react";
+import ModalContext from "../context/ModalContext";
+
 
 
 const GameItem = (props) => {
+    const { showModalMsg } = useContext(ModalContext);
     const [selectedRating, setSelectedRating] = useState("");
+  
   //  alert(JSON.stringify(props));
     const addRating = ()=>{      
-                alert("AddRating")  
-                alert("Game num"+props.item.gameNum)      
+             
             const newRating={
                
                 gameNum: props.item.gameNum,
                 rating: selectedRating,
                 userNum: 1
             }; 
-            alert("New Rating"+JSON.stringify(newRating))      
+          
             fetch(constant.databaseUrl+'/games/addRate', {
                 method: 'POST',
                 headers: new Headers({
@@ -25,12 +29,15 @@ const GameItem = (props) => {
                 body: JSON.stringify(newRating)
             })
             .then(res=>{
+                
             })
             .catch(err=>{
                 console.log(err);
             });
          
-        
+          //  alert("Rating Added successfully")  
+          showModalMsg();
+          
     }
     
     return (
@@ -65,8 +72,12 @@ const GameItem = (props) => {
               <input className="radio-rating" type="radio" value="4" name="3" /> 4
               <input className="radio-rating" type="radio" value="5" name="3" /> 5            
             </p>    
-            <button className="radio-rating" onClick={addRating}>Submit</button>    
-        </div>
+            <button className="radio-rating" onClick={addRating}
+          >Submit</button>   
+          
+           
+                
+            </div>
     )
 }
 

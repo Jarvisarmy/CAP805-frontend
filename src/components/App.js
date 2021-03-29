@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 
 import './../css/App.css';
 import GameContext from "../context/GameContext";
+import ModalContext from "../context/ModalContext";
 import constant from './../constant.js';
 import PublicPage from './../pages/PublicPage';
 import ProfilePage from './../pages/ProfilePage';
@@ -29,6 +30,12 @@ function App() {
    
     const [gameCategory, setGameCategory] = useState([]);
     const [filteredGames, setFilteredGames] = useState([]);
+    
+    const [popupModaMessage, setPopupModalMessage] = useState({
+        msg: '',
+        visible: false
+      });
+    
 
     const getGamesbyCategory=(inputCategoryId)=>
     {    
@@ -71,6 +78,11 @@ function App() {
         setFilteredGames(filteredGames);
       }
 
+      const showModalMsg = () => {
+     
+        setPopupModalMessage({"msg":"Rating Added successfully", "visible":true});
+      }
+  
 
     useEffect(()=>{
         getAllGames();
@@ -87,6 +99,13 @@ function App() {
                 console.log(err);
             });
         }
+
+        const hidePopupModal = () => {
+            setPopupModalMessage({
+              msg: "",
+              visible: false
+            })
+          }
             
     const userLogin = (user)=>{
         fetch(constant.databaseUrl+'/loginPage', {
@@ -122,7 +141,7 @@ function App() {
     return (
         <>
         <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, }}>
-         
+        <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>
                     <Route exact path="/">
@@ -148,6 +167,7 @@ function App() {
                     </Route>
                 </Switch>
             </Router>
+            </ModalContext.Provider>
         </GameContext.Provider>
         </>
 )};
