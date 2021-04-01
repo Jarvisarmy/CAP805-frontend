@@ -126,3 +126,10 @@
     align-self: center;
     text-decoration: none;
 }
+
+.alert-content {
+    display: block;
+    font-size: 12px;
+    color: #c40000;
+    padding-left: 40px;
+}

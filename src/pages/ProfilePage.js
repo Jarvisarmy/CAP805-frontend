@@ -11,12 +11,17 @@ import {useState,useEffect} from 'react';
 const ProfilePage = (props) => {
     const [searchInput, setSearchInput] = useState("");
     const [games,setGames] = useState([]);
-    // these is fake lists, will be replaced by the data pulled from database later
+    const [approvedGames, setApprovedGames] = useState([]);
+    const [inProgressGames, setInProgressGames] = useState([]);
     const getGamesByUser = ()=> {
         fetch(constant.databaseUrl+'/games?user=1')
         .then(response=>response.json())
         .then(result=>{
             setGames(result);
+            var approved = result.filter(game=>game.isApproved);
+            setApprovedGames(approved);
+            var inProgress = result.filter(game=>!game.isApproved);
+            setInProgressGames(inProgress);
         })
         .catch(err=>{
             console.log(err);
@@ -50,11 +55,13 @@ const ProfilePage = (props) => {
                     </div>
                 </div>
                 <div className="user-games-container">
-                    <input className="user-games-search" placeholder="Search" value={searchInput} >
+                    <input className="user-games-search" placeholder="Search" value={searchInput} onChange={(event)=>{
+                        setSearchInput(event.target.value);
+                    }}>
                     </input>
                     <div className="user-games-pane">
-                        <UserGameEditList title="user-review games" lists={games} />
-                        <UserGameEditList title="approved games" lists={games} />
+                        <UserGameEditList title="user-review games" lists={inProgressGames} />
+                        <UserGameEditList title="approved games" lists={approvedGames} />
                     </div>
                 </div>
                 <a className="add-game-button" href="/addGame">Upload game</a>

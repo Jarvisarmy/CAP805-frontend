@@ -3,6 +3,7 @@ import {useState} from 'react';
 import constant from './../constant.js';
 import {useContext} from 'react';
 import GameContext from "../context/GameContext";
+import "./../css/ProfilePage.css";
 const AddGame = () => {
     const {getAllGames,gameCategory} = useContext(GameContext);
     const [gameName, setGameName] = useState("");
@@ -12,8 +13,41 @@ const AddGame = () => {
     const [errorName, setErrorName] = useState("");
     const [errorUrl, setErrorUrl] = useState("");
     const [errorDescription, setErrorDescription] = useState("");
+    const [errorCategory,setErrorCategory] = useState("");
     const validateForm = ()=>{
-        return true;
+        var isValid = true;
+        var reUrl = new RegExp(/^(http(s?):\/\/)?(www\.)+[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/);
+        if (gameName === "") {
+            setErrorName("name cannot be empty")
+            isValid = false;
+        } else {
+            setErrorName("");
+        }
+        if (!reUrl.test(gameUrl)) {
+            setErrorUrl("the provided URL is not valid");
+            isValid = false;
+        } else {
+            setErrorUrl("");
+        }
+        if (gameDescription.length < 100) {
+            setErrorDescription("the description must contains at least 100 characters");
+            isValid = false;
+        } else {
+            setErrorDescription("");
+        }
+        if (selectedGameCategory === "") {
+            setErrorCategory("the category must be selected");
+            isValid = false;
+        } else {
+            setErrorCategory("");
+        }
+        if (isValid) {
+            setErrorName("");
+            setErrorUrl("");
+            setErrorCategory("");
+            setErrorDescription("");
+        }
+        return isValid;
     }
     const addGame = ()=>{
         if(validateForm()) {
@@ -45,7 +79,7 @@ const AddGame = () => {
             setGameUrl("");
             setGameDescription("");
             setSelectedGameCategory("");
-            
+            window.location.href="/profilePage";
         }
     }
     return (
@@ -56,14 +90,14 @@ const AddGame = () => {
                 <input className="form-control" type="text" id="gameName" value={gameName} onChange={(event)=>{
                     setGameName(event.target.value);
                 }}/>
-                <span className="error" >{errorName}</span>
+                <span className="alert-content" >{errorName}</span>
             </div>
             <div className="form-control-container">
                 <label htmlFor="gameUrl"> Game URL </label>
                 <input className="form-control" type="text" id="gameUrl" value={gameUrl} onChange={(event)=>{
                     setGameUrl(event.target.value);
                 }}/>
-                <span className="error" >{errorUrl}</span>
+                <span className="alert-content" >{errorUrl}</span>
             </div>
             <div className="form-control-container">             
             <label htmlFor="selectedGameCategory"> Category </label>
@@ -75,11 +109,12 @@ const AddGame = () => {
         
                     {gameCategory.map((category) => (
         
-                      <option value={category.categoryId} >{category.categoryName} </option>
-                    )
-                    )
-                    }
+                        <option key={category.categoryId} value={category.categoryId} >{category.categoryName} </option>
+                        )
+                    )}
                   </select>
+                  <span className="alert-content" >{errorCategory}</span>
+
             
             </div>
             <div className = "form-control-container">
@@ -87,10 +122,10 @@ const AddGame = () => {
                 <textarea className="form-control" id="gameDescription" value={gameDescription} onChange={(event)=>{
                     setGameDescription(event.target.value);
                 }}> </textarea>
-                <span className="error">{errorDescription}</span>
+                <span className="alert-content">{errorDescription}</span>
             </div>
             <div className="form-control-container">
-                <a type="button" onClick={addGame} href="/">Save Game </a>
+                <a type="button" onClick={addGame}>Save Game </a>
             </div>
         </form>
     </section>

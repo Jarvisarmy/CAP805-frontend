@@ -11,7 +11,7 @@ const CategoryList = () => {
     return (
         <div className="grid grid-column-2">
            
-                {gameCategory.map((category) => (<CategoryItem
+                {gameCategory.map((category) => (<CategoryItem key={category.categoryId}
                     category={category} games={games} >
                 </CategoryItem>))}
                   </div>        

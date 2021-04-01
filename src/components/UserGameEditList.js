@@ -2,7 +2,7 @@ import React from 'react'
 import './../css/ProfilePage.css';
 const UserGameEditList = (props) => {
     return (
-        <div clsssName="user-game-edit-list-contianer">
+        <div className="user-game-edit-list-contianer">
             <div className="user-game-edit-list-title">{props.title}</div>
             <div className="user-game-edit-list-main">
                 {props.lists.map((item)=>{
