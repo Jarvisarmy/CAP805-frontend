@@ -27,9 +27,23 @@ const ProfilePage = (props) => {
             console.log(err);
         });
     }
+    const getGamesByInput = () =>{
+        if (searchInput !== "") {
+            var filteredGames = games.filter(item => item.gameName.toLowerCase().includes(searchInput.toLowerCase()));
+            var approved = filteredGames.filter(game=>game.isApproved);
+            setApprovedGames(approved);
+            var inProgress = filteredGames.filter(game=>!game.isApproved);
+            setInProgressGames(inProgress);
+        } else {
+            var approved = games.filter(game=>game.isApproved);
+            setApprovedGames(approved);
+            var inProgress = games.filter(game=>!game.isApproved);
+            setInProgressGames(inProgress);
+        }
+    }
     useEffect(()=>{
         getGamesByUser()
-    },[games]);
+    },[]);
     return (
         <>
             <Header/>
@@ -57,6 +71,10 @@ const ProfilePage = (props) => {
                 <div className="user-games-container">
                     <input className="user-games-search" placeholder="Search" value={searchInput} onChange={(event)=>{
                         setSearchInput(event.target.value);
+                    }} onKeyDown={(event)=>{
+                        if (event.keyCode === 13) {
+                            getGamesByInput();
+                        }
                     }}>
                     </input>
                     <div className="user-games-pane">
