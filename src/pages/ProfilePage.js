@@ -2,6 +2,7 @@ import AddGame from './../components/AddGame.js';
 import Header from './../components/Header.js';
 import Navigation from './../components/Navigation.js';
 import UserGameEditList from './../components/UserGameEditList';
+import EditProfile from './../components/EditProfile';
 import constant from './../constant.js';
 import './../css/ProfilePage.css';
 import {useState,useEffect} from 'react';
@@ -13,6 +14,34 @@ const ProfilePage = (props) => {
     const [games,setGames] = useState([]);
     const [approvedGames, setApprovedGames] = useState([]);
     const [inProgressGames, setInProgressGames] = useState([]);
+    const [userInfo, setUserInfo] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNum: "",
+        address: ""
+    });
+    const [editMadal, setEditMadal] = useState(false);
+    const getUserInfo = ()=>{
+        fetch(constant.databaseUrl+'/loginPage', {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                userName: "jarvis",
+                password: "123456"
+            })
+        })
+        .then(response=>response.json()).then(result=>{
+            if (result.length !== 0) {
+                setUserInfo(result[0]);
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
     const getGamesByUser = ()=> {
         fetch(constant.databaseUrl+'/games?user=1')
         .then(response=>response.json())
@@ -41,31 +70,40 @@ const ProfilePage = (props) => {
             setInProgressGames(inProgress);
         }
     }
+    const phoneFormat = (p)=>{
+        return p.substring(0,3)+"-"+p.substring(3,6)+"-"+p.substring(6,10);
+    }
+    const turnOffMadal = () => {
+        setEditMadal(false);
+    }
     useEffect(()=>{
-        getGamesByUser()
+        getGamesByUser();
+        getUserInfo();
     },[]);
     return (
         <>
             <Header/>
             <Navigation/>
-            <div className="user-profile-contianer">
+            <div className={editMadal ? "user-profile-container disabled":"user-profile-container"}>
                 <div className="user-info-container">
                     <div className="user-name">
-                        Jarvis Zhang
+                        {userInfo.firstName + " " + userInfo.lastName}
                     </div>
                     <div className="user-info-detail">
                         <div className ="user-info-item">
-                            username@gmail.com
+                            {userInfo.email}
                         </div>
                         <div className ="user-info-item">
-                            410-322-4255
+                            {phoneFormat(userInfo.phoneNum)}
                         </div>
                         <div className="user-info-item">
-                            130 columbia st, Waterloo, Ontario
+                            {userInfo.address}
                         </div>
-                        <a className="user-save" href="/profilePage">
-                            save
-                        </a>
+                        <button className="user-save" onClick={()=>{
+                            setEditMadal(true);
+                        }}>
+                            Edit
+                        </button>
                     </div>
                 </div>
                 <div className="user-games-container">
@@ -84,6 +122,9 @@ const ProfilePage = (props) => {
                 </div>
                 <a className="add-game-button" href="/addGame">Upload game</a>
             </div> 
+            <div className={editMadal ? "edit-profile-container" : "edit-profile-container hidden"}>
+                <EditProfile user={userInfo} turnOffMadal={turnOffMadal}/>
+            </div>
             
         </>
     )

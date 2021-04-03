@@ -17,6 +17,7 @@ const AddGame = () => {
     const validateForm = ()=>{
         var isValid = true;
         var reUrl = new RegExp(/^(http(s?):\/\/)?(www\.)+[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/);
+        var reHttp = new RegExp(/^(http(s?):\/\/)(www\.)+[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/)
         if (gameName === "") {
             setErrorName("name cannot be empty")
             isValid = false;
@@ -27,7 +28,12 @@ const AddGame = () => {
             setErrorUrl("the provided URL is not valid");
             isValid = false;
         } else {
-            setErrorUrl("");
+            if (!reHttp.test(gameUrl)) {
+                setErrorUrl("for safety, the URL must start with http or https");
+                isValid=false;
+            } else {
+                setErrorUrl("");
+            }
         }
         if (gameDescription.length < 100) {
             setErrorDescription("the description must contains at least 100 characters");
