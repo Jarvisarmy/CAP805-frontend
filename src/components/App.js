@@ -9,6 +9,7 @@ import ProfilePage from './../pages/ProfilePage';
 import CategoryPage from './../pages/CategoryPage';
 import GamesPage from './../pages/GamesPage';
 import AddGamePage from './../pages/AddGamePage';
+import GameInfoPage from '../pages/GameInfoPage';
 
 import action from '../img/action.jpg';
 import adventure from '../img/adventure.jpeg';
@@ -44,6 +45,7 @@ function App() {
         })
         return gamesList;
     }
+    
 
     const [user, setUser] = useState({
         userName : "",
@@ -165,6 +167,7 @@ function App() {
                     <Route path="/signupPage">
                         <SignUpPage />
                     </Route>
+                    <Route path="/game/:id" render={(props) => <GameInfoPage gameId={props.match.params.id} />} />
                 </Switch>
             </Router>
             </ModalContext.Provider>

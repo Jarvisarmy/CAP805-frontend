@@ -1,9 +1,13 @@
+a {
+    text-decoration: none;
 
+}
 .user-profile-container {
     width: 90%;
+    margin: auto;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 300px 800px 100px;
+    grid-template-rows: 200px 600px 100px;
     border: 2px solid grey;
     border-radius: 4px;
 }
@@ -108,6 +112,7 @@
     height: 30px;
     font-size: 14px;
     justify-self: center;
+    text-decoration: none;
 }
 .button-attention {
     border-color: red;
@@ -125,4 +130,48 @@
     text-align: center;
     align-self: center;
     text-decoration: none;
+}
+
+.alert-content {
+    display: block;
+    font-size: 12px;
+    color: #c40000;
+    padding-left: 40px;
+}
+
+.game-info-container {
+    width: 800px;
+    margin: 40px auto;
+    border: 4px solid #1889b3;
+    border-radius: 25px;
+}
+.game-info-container > p {
+    margin: 20px;
+    word-wrap: break-word;
+}
+
+.edit-profile-container {
+    position: fixed;
+    top: 150px;
+    left: 250px;
+    width: 900px;
+    border: 2px solid #606567;
+    border-radius: 10px;
+    background-color: #a7b0b3;
+}
+.add-game-container {
+    position: fixed;
+    top: 150px;
+    left: 250px;
+    width: 900px;
+    border: 2px solid #606567;
+    border-radius: 10px;
+    background-color: #a7b0b3;
+}
+.hidden {
+    display: none;
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
 }
