@@ -31,7 +31,7 @@ function App() {
    
     const [gameCategory, setGameCategory] = useState([]);
     const [filteredGames, setFilteredGames] = useState([]);
-    
+    const [ratings, setRatings] = useState([]);
     const [popupModaMessage, setPopupModalMessage] = useState({
         msg: '',
         visible: false
@@ -101,6 +101,19 @@ function App() {
                 console.log(err);
             });
         }
+        const getAllRatings = ()=>{      
+            
+            fetch(constant.databaseUrl+'/ratings')
+            .then(response=>response.json())
+            .then(result=>{
+                console.log(result);
+                setRatings(result);           
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+          
+      }
 
         const hidePopupModal = () => {
             setPopupModalMessage({

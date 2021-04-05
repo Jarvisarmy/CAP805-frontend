@@ -250,4 +250,9 @@ body
 {
     display:none;
 }
+.game_rating {
+    display: flex;
+    font-weight: bold;
+    font-size: 15px;
+  }
   

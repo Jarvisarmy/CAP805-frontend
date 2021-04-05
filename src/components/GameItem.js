@@ -11,7 +11,10 @@ import ModalContext from "../context/ModalContext";
 const GameItem = (props) => {
     const { showModalMsg } = useContext(ModalContext);
     const {user} = useContext(GameContext);
+ 
     const [selectedRating, setSelectedRating] = useState("");
+   // const [gamesById, setFilteredGames] = useState("");
+    
 
   //  alert(JSON.stringify(props));
     const addRating = ()=>{      
@@ -31,7 +34,7 @@ const GameItem = (props) => {
                 body: JSON.stringify(newRating)
             })
             .then(res=>{
-                
+              
             })
             .catch(err=>{
                 console.log(err);
@@ -42,6 +45,20 @@ const GameItem = (props) => {
           
     }
     
+    const getGameById= (id) =>{
+       
+        fetch(constant.databaseUrl+'/game/'+id)
+        .then(response=>response.json())
+        .then(result=>{
+              
+   
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
+ 
+ 
     return (
         <>
         <div className="game-container">
@@ -50,6 +67,9 @@ const GameItem = (props) => {
                 <p className="game-name">
                     {props.item.gameName}
                 </p>
+              
+
+             
                 {/*
                 <FaWindowClose className="grid-x-right" onClick={()=>{
                     props.onDeleteGame(props.item.gameNum)
@@ -61,8 +81,12 @@ const GameItem = (props) => {
             <p className="game-description">
                 {props.item.gameDescription}
             </p>
-            <br/><br/>
-            {user.userName !="" ? (
+            
+            <p className="game_rating">
+            Rating: {(props.item.rating).toFixed(1)}          
+        </p>
+        <br/>
+            {user.userName ==="" ? (
             <p className="rate-description" onChange={(evt) => {
             
                 setSelectedRating(evt.target.value);
