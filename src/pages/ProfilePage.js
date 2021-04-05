@@ -87,7 +87,7 @@ const ProfilePage = (props) => {
         <>
             <Header/>
             <Navigation/>
-            <div className={editMadal ? "user-profile-container disabled":"user-profile-container"}>
+            <div className={editMadal || addMadal ? "user-profile-container disabled":"user-profile-container"}>
                 <div className="user-info-container">
                     <div className="user-name">
                         {userInfo.firstName + " " + userInfo.lastName}
