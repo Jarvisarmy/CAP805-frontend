@@ -142,7 +142,7 @@ function App() {
  
     return (
         <>
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user }}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>

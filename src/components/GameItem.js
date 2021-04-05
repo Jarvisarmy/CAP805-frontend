@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaWindowClose } from "react-icons/fa";
+import GameContext from "../context/GameContext";
 import constant from './../constant.js';
 import {useState} from 'react';
 import { useContext } from "react";
@@ -9,8 +10,9 @@ import ModalContext from "../context/ModalContext";
 
 const GameItem = (props) => {
     const { showModalMsg } = useContext(ModalContext);
+    const {user} = useContext(GameContext);
     const [selectedRating, setSelectedRating] = useState("");
-  
+
   //  alert(JSON.stringify(props));
     const addRating = ()=>{      
              
@@ -41,6 +43,7 @@ const GameItem = (props) => {
     }
     
     return (
+        <>
         <div className="game-container">
             <div className="grid grid-col-2 game-top-area">        
       
@@ -52,15 +55,14 @@ const GameItem = (props) => {
                     props.onDeleteGame(props.item.gameNum)
                 }}/>
                 */}
-                <a onClick={()=>{
-                    props.onDeleteGame(props.item.gameNum)
-                }} href="/" >delete </a>
+                
             </div>
             <a className="game-url" href={props.item.gameUrl}> {props.item.gameUrl} </a>
             <p className="game-description">
                 {props.item.gameDescription}
             </p>
             <br/><br/>
+            {user.userName !="" ? (
             <p className="rate-description" onChange={(evt) => {
             
                 setSelectedRating(evt.target.value);
@@ -71,13 +73,14 @@ const GameItem = (props) => {
               <input className="radio-rating" type="radio" value="3" name="3" /> 3
               <input className="radio-rating" type="radio" value="4" name="3" /> 4
               <input className="radio-rating" type="radio" value="5" name="3" /> 5            
-            </p>    
+               
             <button className="radio-rating" onClick={addRating}
           >Submit</button>   
-          
-           
+          </p> 
+            ): (<p></p>)}
                 
             </div>
+            </>
     )
 }
 
