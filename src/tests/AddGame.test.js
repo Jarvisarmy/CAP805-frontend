@@ -12,14 +12,5 @@ describe("testing",()=>{
         shallow(<AddGame />);
     })
 
-    it("test",()=>{
-        const wrapper = shallow(<AddGame />);
-        console.log(wrapper);
-        const gameName = wrapper.find("#gameName");
-        gameName.simulate('change',{target:{value:""}});
-        //expect(wrapper.prop("gameName")).toBe("");
-        //fireEvent.click(wrapper.find("Save Game"));
-        //expect(wrapper.state("errorName")).toBe("name cannot be empty");
-    })
 })
 

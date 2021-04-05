@@ -4,7 +4,7 @@ import constant from './../constant.js';
 import {useContext} from 'react';
 import GameContext from "../context/GameContext";
 import "./../css/ProfilePage.css";
-const AddGame = () => {
+const AddGame = (props) => {
     const [gameCategory,setGameCategory] =useState([]);
     const [gameName, setGameName] = useState("");
     const [gameUrl, setGameUrl] = useState("");
@@ -155,6 +155,7 @@ const AddGame = () => {
             </div>
             <div className="form-control-container">
                 <a type="button" onClick={addGame}>Save Game </a>
+                <a type="button" onClick={props.turnOffMadal}> cancel</a>
             </div>
         </form>
     </section>

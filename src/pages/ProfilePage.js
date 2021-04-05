@@ -22,6 +22,7 @@ const ProfilePage = (props) => {
         address: ""
     });
     const [editMadal, setEditMadal] = useState(false);
+    const [addMadal, setAddMadal] = useState(false);
     const getUserInfo = ()=>{
         fetch(constant.databaseUrl+'/loginPage', {
             method: 'POST',
@@ -75,7 +76,9 @@ const ProfilePage = (props) => {
     }
     const turnOffMadal = () => {
         setEditMadal(false);
+        setAddMadal(false);
     }
+
     useEffect(()=>{
         getGamesByUser();
         getUserInfo();
@@ -120,10 +123,15 @@ const ProfilePage = (props) => {
                         <UserGameEditList title="approved games" lists={approvedGames} />
                     </div>
                 </div>
-                <a className="add-game-button" href="/addGame">Upload game</a>
+                <button className="add-game-button" onClick={()=>{
+                    setAddMadal(true);
+                }}>Upload game</button>
             </div> 
             <div className={editMadal ? "edit-profile-container" : "edit-profile-container hidden"}>
                 <EditProfile user={userInfo} turnOffMadal={turnOffMadal}/>
+            </div>
+            <div className={addMadal ? "add-game-container" : "add-game-container hidden"}>
+                <AddGame turnOffMadal={turnOffMadal}/>
             </div>
             
         </>
