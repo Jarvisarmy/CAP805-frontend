@@ -51,7 +51,7 @@ const AddGame = (props) => {
         } else {
             setErrorDescription("");
         }
-        if (selectedGameCategory === 0) {
+        if (selectedGameCategory == 0) {
             setErrorCategory("the category must be selected");
             isValid = false;
         } else {
@@ -133,6 +133,7 @@ const AddGame = (props) => {
                 <select id="selectedGameCategory" className="form-control" onChange={(evt) => {
             
                     setSelectedGameCategory(evt.target.value);
+                    console.log(evt.target.value);
                   }}>
                     <option value={0}>Choose category</option>
         
