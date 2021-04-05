@@ -9,7 +9,7 @@ const AddGame = (props) => {
     const [gameName, setGameName] = useState("");
     const [gameUrl, setGameUrl] = useState("");
     const [gameDescription, setGameDescription] = useState("");
-    const [selectedGameCategory, setSelectedGameCategory] = useState("");
+    const [selectedGameCategory, setSelectedGameCategory] = useState(0);
     const [errorName, setErrorName] = useState("");
     const [errorUrl, setErrorUrl] = useState("");
     const [errorDescription, setErrorDescription] = useState("");
@@ -51,7 +51,7 @@ const AddGame = (props) => {
         } else {
             setErrorDescription("");
         }
-        if (selectedGameCategory === "") {
+        if (selectedGameCategory === 0) {
             setErrorCategory("the category must be selected");
             isValid = false;
         } else {
@@ -134,7 +134,7 @@ const AddGame = (props) => {
             
                     setSelectedGameCategory(evt.target.value);
                   }}>
-                    <option>Choose category</option>
+                    <option value={0}>Choose category</option>
         
                     {gameCategory.map((category) => (
         
