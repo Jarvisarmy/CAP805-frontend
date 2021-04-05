@@ -1,11 +1,11 @@
 import React from 'react'
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import constant from './../constant.js';
 import {useContext} from 'react';
 import GameContext from "../context/GameContext";
 import "./../css/ProfilePage.css";
 const AddGame = () => {
-    const {getAllGames,gameCategory} = useContext(GameContext);
+    const [gameCategory,setGameCategory] =useState([]);
     const [gameName, setGameName] = useState("");
     const [gameUrl, setGameUrl] = useState("");
     const [gameDescription, setGameDescription] = useState("");
@@ -14,6 +14,16 @@ const AddGame = () => {
     const [errorUrl, setErrorUrl] = useState("");
     const [errorDescription, setErrorDescription] = useState("");
     const [errorCategory,setErrorCategory] = useState("");
+    const getAllCategory = ()=>{
+      
+        fetch(constant.databaseUrl+'/categories')
+        .then(response=>response.json())
+        .then(result=>{
+            setGameCategory(result);
+        })
+        .catch(err=>{
+         });
+    }
     const validateForm = ()=>{
         var isValid = true;
         var reUrl = new RegExp(/^(http(s?):\/\/)?(www\.)+[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/);
@@ -74,20 +84,33 @@ const AddGame = () => {
                 }),
                 body: JSON.stringify(newGame)
             })
+            .then(response=>response.json())
             .then(res=>{
+                console.log("msg: "+res);
+                if (res === "namefail") {
+                    setErrorName("the game name already exists");
+                } else if (res === "urlfail") {
+                    setErrorUrl("the game URL already exists");
+                } else if (res === "other") {
+                    setErrorName("something wrong");
+                    
+                } else {
+                    setGameName("");
+                    setGameUrl("");
+                    setGameDescription("");
+                    setSelectedGameCategory("");
+                    window.location.href="/profilePage";
+                }
             })
             .catch(err=>{
-                console.log(err);
+                
             });
-            getAllGames();
-            // clear the title and description
-            setGameName("");
-            setGameUrl("");
-            setGameDescription("");
-            setSelectedGameCategory("");
-            window.location.href="/profilePage";
+            
         }
     }
+    useEffect(()=>{
+        getAllCategory();
+    },[])
     return (
         <section>
         <form>
