@@ -6,7 +6,7 @@ import GameContext from "../context/GameContext";
 
 const CategoryList = () => {
     const {gameCategory,games} = useContext(GameContext)
-
+ 
     
     return (
         <div className="grid grid-column-2">
