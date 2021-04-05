@@ -82,9 +82,13 @@ const GameItem = (props) => {
                 {props.item.gameDescription}
             </p>
             
-            <p className="game_rating">
-            Rating: {(props.item.rating).toFixed(1)}          
-        </p>
+          
+            {props.item.rating !=null ?
+            ( <p className="game_rating">
+                Rating: {(props.item.rating).toFixed(1)}          
+        </p>) : ( <p className="game_rating">
+        Rating: {(props.item.rating)}          
+         </p>) }
         <br/>
             {user.userName ==="" ? (
             <p className="rate-description" onChange={(evt) => {
