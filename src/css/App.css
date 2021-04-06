@@ -5,8 +5,9 @@
 .grid-col-2 {
     grid-template-columns: 50% 50%;
 }
-.grid-col-2 {
-    grid-template-columns: 50% 50%;
+.grid-col2-home {
+    grid-template-columns: 30% 70%;
+    margin-top:-12px;
 }
 
 .grid-col-3
@@ -109,10 +110,11 @@ li
     margin-bottom: 20px;
 }
 
-.form-control-container label , .form-control-container input 
+.form-control-container label , .form-control-container input , .form-control-container textarea,  .form-control-container select  
 {
     margin-left: 30px;
     display:block;
+    width:70%;
 }
 
 .form-control-container label 
@@ -163,12 +165,23 @@ textarea.form-control
 {
     font-size:calc(1rem - 2px);
 }
+.rate-description
+{
+    font-size:14px;
+    font-weight: bold;
+}
+.radio-rating
+{
+    font-size:calc(1rem - 2px);
+    margin-left:20px;
+}
 
 body
 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.4rem;
     font-size: 1.1rem;
+    background-color: rgb(238, 238, 238);
 }
 
 .categoryBox
@@ -186,3 +199,60 @@ body
       align-items: center;
       font-weight: bold;
   }
+.intro
+{
+    padding: 50px;
+    margin-top:50px;
+    font-size: 17px;
+    font-weight:normal;
+    font-style:normal;
+    color:rgb(17, 74, 107);
+}
+.intro-heading
+{     
+    font-size: larger;
+    font-weight:bold;
+    line-height:2.4rem;
+    padding-bottom: 20px;;
+    
+ }
+
+ /******************Modal*****************************/
+ .popUp-Modal
+  {
+      position:fixed;
+      top:20%;
+      left: 170px;
+      height:100vh;
+      width:70%;
+      z-index:1;
+      background-color: transparent;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      
+  
+  }
+  .popUp-Modal-container
+  {
+      width:300px;   
+      margin: 0 auto;
+      font-size: 16px;
+      font-weight: bold;
+      font-family: Arial;
+      background-color:white;
+      padding:50px 32px;
+      text-align: center;
+      align-items: center;
+  }
+
+  .hide
+{
+    display:none;
+}
+.game_rating {
+    display: flex;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  

@@ -1,20 +1,19 @@
 import React from 'react'
-
 import Header from '../components/Header.js';
 import Navigation from '../components/Navigation.js';
-import GamesList from '../components/GameList.js';
-import PopupModal from '../components/PopupModal.js';
+import AddGame from '../components/AddGame.js';
 
-const GamesPage = () => {
+const AddGamePage = () => {
     return (
         <div>
         <Header/>
         <Navigation/>
-        <GamesList/>   
-        <PopupModal  /> 
+            <AddGame/>   
         </div>
     )
 }
 
-export default GamesPage
+export default AddGamePage
+
+
 

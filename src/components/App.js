@@ -2,13 +2,15 @@ import {useState, useEffect} from 'react';
 
 import './../css/App.css';
 import GameContext from "../context/GameContext";
+import ModalContext from "../context/ModalContext";
 import constant from './../constant.js';
 import AdminPage from './../pages/AdminPage';
 import PublicPage from './../pages/PublicPage';
 import ProfilePage from './../pages/ProfilePage';
 import CategoryPage from './../pages/CategoryPage';
 import GamesPage from './../pages/GamesPage';
-import AddGame from './../components/AddGame';
+import AddGamePage from './../pages/AddGamePage';
+import GameInfoPage from '../pages/GameInfoPage';
 
 import action from '../img/action.jpg';
 import adventure from '../img/adventure.jpeg';
@@ -30,6 +32,12 @@ function App() {
     const [users, setUsers] = useState([]);
     const [gameCategory, setGameCategory] = useState([]);
     const [filteredGames, setFilteredGames] = useState([]);
+    const [ratings, setRatings] = useState([]);
+    const [popupModaMessage, setPopupModalMessage] = useState({
+        msg: '',
+        visible: false
+      });
+    
 
     const getGamesbyCategory=(inputCategoryId)=>
     {    
@@ -38,6 +46,7 @@ function App() {
         })
         return gamesList;
     }
+    
 
     const [user, setUser] = useState({
         userName : "",
@@ -72,6 +81,11 @@ function App() {
         setFilteredGames(filteredGames);
       }
 
+      const showModalMsg = () => {
+     
+        setPopupModalMessage({"msg":"Rating Added successfully", "visible":true});
+      }
+  
 
     useEffect(()=>{
         getAllGames();
@@ -88,6 +102,26 @@ function App() {
                 console.log(err);
             });
         }
+        const getAllRatings = ()=>{      
+            
+            fetch(constant.databaseUrl+'/ratings')
+            .then(response=>response.json())
+            .then(result=>{
+                console.log(result);
+                setRatings(result);           
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+          
+      }
+
+        const hidePopupModal = () => {
+            setPopupModalMessage({
+              msg: "",
+              visible: false
+            })
+          }
             
     const userLogin = (user)=>{
         fetch(constant.databaseUrl+'/loginPage', {
@@ -171,8 +205,13 @@ const deleteUser = (uNum)=>{
  
     return (
         <>
+<<<<<<< HEAD
         <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, unApprovedGames, approveGame, users, deleteUser}}>
          
+=======
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user }}>
+        <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
+>>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
             <Router>
                 <Switch>
                     <Route exact path="/">
@@ -188,7 +227,7 @@ const deleteUser = (uNum)=>{
                         <GamesPage />
                     </Route>
                     <Route path="/addGame">
-                        <AddGame />
+                        <AddGamePage />
                     </Route>
                     <Route path="/loginPage">
                         <LoginPage />
@@ -196,11 +235,16 @@ const deleteUser = (uNum)=>{
                     <Route path="/signupPage">
                         <SignUpPage />
                     </Route>
+<<<<<<< HEAD
                     <Route path="/adminPage">
                         <AdminPage />
                     </Route>
+=======
+                    <Route path="/game/:id" render={(props) => <GameInfoPage gameId={props.match.params.id} />} />
+>>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
                 </Switch>
             </Router>
+            </ModalContext.Provider>
         </GameContext.Provider>
         </>
 )};
