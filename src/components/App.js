@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import './../css/App.css';
 import GameContext from "../context/GameContext";
 import constant from './../constant.js';
+import AdminPage from './../pages/AdminPage';
 import PublicPage from './../pages/PublicPage';
 import ProfilePage from './../pages/ProfilePage';
 import CategoryPage from './../pages/CategoryPage';
@@ -25,8 +26,8 @@ import {
 
 function App() {
     const [games, setGames] = useState([]);
-
-   
+    const [unApprovedGames, setUnApproveGames] = useState([]);
+    const [users, setUsers] = useState([]);
     const [gameCategory, setGameCategory] = useState([]);
     const [filteredGames, setFilteredGames] = useState([]);
 
@@ -112,16 +113,65 @@ function App() {
             console.log(err);
         });
     }
+//fetch request for games for admin to approve
+    const getUnApprovedGames = ()=>{
+        fetch(constant.databaseUrl+'/adminPage')
+        .then(response=>response.json())
+        .then(result=>{
+            console.log(result);
+            setUnApproveGames(result);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
+// approving a game
+    const approveGame = (gameNum)=>{
+        console.log(gameNum);
+        console.log(constant.databaseUrl+'/adminPage/' + gameNum);
+        fetch(constant.databaseUrl+'/adminPage/' + gameNum)
+        .then(response=>response.json()).then(result=>result.json())
+        .catch(err=>{
+            console.log(err);
+        });
+        getUnApprovedGames();
+    }
 
+//getting all users
+
+const getAllUsers = ()=>{
+    fetch(constant.databaseUrl+'/adminPage/users')
+    .then(response=>response.json())
+    .then(result=>{
+        console.log(result);
+        setUsers(result);
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+}
+
+const deleteUser = (uNum)=>{
+    fetch(constant.databaseUrl+'/adminPage/delete/'+ uNum)
+    .then(res=>{
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+    getAllUsers();
+    
+}
     useEffect(()=>{
         getAllGames();
         getAllCategory();
+        getUnApprovedGames();
+        getAllUsers();
         
     },[]);
  
     return (
         <>
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, unApprovedGames, approveGame, users, deleteUser}}>
          
             <Router>
                 <Switch>
@@ -145,6 +195,9 @@ function App() {
                     </Route>
                     <Route path="/signupPage">
                         <SignUpPage />
+                    </Route>
+                    <Route path="/adminPage">
+                        <AdminPage />
                     </Route>
                 </Switch>
             </Router>

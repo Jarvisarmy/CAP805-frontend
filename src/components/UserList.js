@@ -8,22 +8,25 @@ const GameItem = (props) => {
         <div className="game-container">
             <div className="grid grid-col-2 game-top-area">        
       
-                <p className="game-name">
-                    {props.item.gameName}
+                <p className="user-name">
+                    {props.item.userName}
                 </p>
                 {/*
                 <FaWindowClose className="grid-x-right" onClick={()=>{
                     props.onDeleteGame(props.item.gameNum)
                 }}/>
                 */}
-                <button className = "btn btn-danger" onClick={()=>{
-                    props.onDeleteGame(props.item.gameNum)
+                <button className = "btn btn-danger"onClick={()=>{
+                    props.onDeleteUser(props.item.userNum)
                 }} href="/" >delete </button>
+                <p>
+                    First Name: {props.item.firstName}
+                    <br></br>
+                    Last Name: {props.item.lastName}
+                    <br></br>
+                    Email: {props.item.email}
+                </p>
             </div>
-            <a className="game-url" href={props.item.gameUrl}> {props.item.gameUrl} </a>
-            <p className="game-description">
-                {props.item.gameDescription}
-            </p>
         
         </div>
     )
