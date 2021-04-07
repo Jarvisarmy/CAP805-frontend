@@ -205,13 +205,10 @@ const deleteUser = (uNum)=>{
  
     return (
         <>
-<<<<<<< HEAD
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, unApprovedGames, approveGame, users, deleteUser}}>
+       
          
-=======
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,unApprovedGames, approveGame, users, deleteUser,user }}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
->>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
             <Router>
                 <Switch>
                     <Route exact path="/">
@@ -235,13 +232,10 @@ const deleteUser = (uNum)=>{
                     <Route path="/signupPage">
                         <SignUpPage />
                     </Route>
-<<<<<<< HEAD
                     <Route path="/adminPage">
                         <AdminPage />
                     </Route>
-=======
                     <Route path="/game/:id" render={(props) => <GameInfoPage gameId={props.match.params.id} />} />
->>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
                 </Switch>
             </Router>
             </ModalContext.Provider>

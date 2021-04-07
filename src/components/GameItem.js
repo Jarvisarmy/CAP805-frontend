@@ -75,13 +75,7 @@ const GameItem = (props) => {
                     props.onDeleteGame(props.item.gameNum)
                 }}/>
                 */}
-<<<<<<< HEAD
-                <button className = "btn btn-danger" onClick={()=>{
-                    props.onDeleteGame(props.item.gameNum)
-                }} href="/" >delete </button>
-=======
-                
->>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
+               
             </div>
             <a className="game-url" href={props.item.gameUrl}> {props.item.gameUrl} </a>
             <p className="game-description">

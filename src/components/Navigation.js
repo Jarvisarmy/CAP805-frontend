@@ -8,11 +8,7 @@ const Navigation = () => {
         <nav>
         <ul>
             <li><a href="/">Home </a></li>
-<<<<<<< HEAD
-            <li><a href="/categoryPage"> Categorygit </a></li>            
-=======
-                    
->>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
+                     
             <li><a href="/profilePage"> Profile </a></li>
             <li><a href="/categoryPage"> Games</a></li>
             <li><a href="/loginPage">Login/SignUp </a></li>
