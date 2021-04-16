@@ -23,13 +23,17 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    Redirect,
     Link
 } from "react-router-dom";
+import { json } from 'body-parser';
+import { FaSalesforce } from 'react-icons/fa';
 
 function App() {
     const [games, setGames] = useState([]);
     const [unApprovedGames, setUnApproveGames] = useState([]);
     const [users, setUsers] = useState([]);
+    const [loginStatus, setLoginStatus] =  useState(false);
     const [gameCategory, setGameCategory] = useState([]);
     const [filteredGames, setFilteredGames] = useState([]);
     const [ratings, setRatings] = useState([]);
@@ -37,7 +41,17 @@ function App() {
         msg: '',
         visible: false
       });
-    
+
+      const [user, setUser] = useState({
+        userName : "",
+        password : "",
+        firstName: "",
+        lastName : "",
+        email: "",
+        phoneNum: "",
+        address: "",
+        isAdmin: false
+    });
 
     const getGamesbyCategory=(inputCategoryId)=>
     {    
@@ -48,10 +62,6 @@ function App() {
     }
     
 
-    const [user, setUser] = useState({
-        userName : "",
-        password : "",
-    });
     
     const getAllGames = ()=>{
         fetch(constant.databaseUrl+'/games')
@@ -87,9 +97,9 @@ function App() {
       }
   
 
-    useEffect(()=>{
+    /* useEffect(()=>{
         getAllGames();
-    },[]);
+    },[]); */
 
     const getAllCategory = ()=>{
       
@@ -126,22 +136,29 @@ function App() {
     const userLogin = (user)=>{
         fetch(constant.databaseUrl+'/loginPage', {
             method: 'POST',
+            credentials: 'include',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify(user)
         })
         .then(response=>response.json()).then(result=>{
-            //result = setUser(result);
-            //console.log(result[0]);
-            let userObj = {
-                user: result[0].userName,
-                password: result[0].password
+            //console.log(result);
+            //console.log(loginStatus);
+            /* let userObj = {
+                userName: result.userName,
+                password: result.password,
+                firstName: result.firstName,
+                lastName : result.lastName,
+                email: result.email,
+                phoneNum: result.phoneNum,
+                address: result.address,
+                isAdmin: result.isAdmin
             }
-            //console.log(userObj)
+            console.log(userObj);
             setUser(userObj);
-            console.log(user);
-            //localStorage.setItem(JSON.stringify("user-info", result))
+            console.log(user); */
+            checkLogin();
         })
         .catch(err=>{
             console.log(err);
@@ -173,6 +190,7 @@ function App() {
 
 //getting all users
 
+
 const getAllUsers = ()=>{
     fetch(constant.databaseUrl+'/adminPage/users')
     .then(response=>response.json())
@@ -195,30 +213,73 @@ const deleteUser = (uNum)=>{
     getAllUsers();
     
 }
+
+const userLogout = ()=>{
+    setLoginStatus(false);
+    fetch(constant.databaseUrl+'/logout')
+    .then(res=>{
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+}
+
+const checkLogin = () =>{
+    fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
+    .then(response=>response.json()).then(result=>{
+        console.log(result);
+        if(result.loggedIn){
+            let userObj = {
+                userName: result.user.userName,
+                password: result.user.password,
+                firstName: result.user.firstName,
+                lastName : result.user.lastName,
+                email: result.user.email,
+                phoneNum: result.user.phoneNum,
+                address: result.user.address,
+                isAdmin: result.user.isAdmin
+            }
+            console.log(userObj);
+
+            setUser((previousState)=>{
+                console.log("set userinfo");
+                previousState = userObj;
+                return previousState;
+            });
+            setLoginStatus(true);
+            console.log(loginStatus);
+        }
+        
+        //console.log(loginStatus);
+        console.log(user);
+    }).catch(err=>{
+        console.log(err)
+    });
+}
+/* useEffect(()=>{
+    checkLogin();
+    console.log(user.isAdmin);
+},[loginStatus]); */
+
     useEffect(()=>{
         getAllGames();
         getAllCategory();
         getUnApprovedGames();
         getAllUsers();
-        
+        checkLogin();
     },[]);
- 
+
     return (
-        <>
-<<<<<<< HEAD
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin, unApprovedGames, approveGame, users, deleteUser}}>
-         
-=======
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user }}>
+        <>         
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout }}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
->>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
             <Router>
                 <Switch>
                     <Route exact path="/">
                         <PublicPage />
                     </Route>
                     <Route path="/profilePage">
-                        <ProfilePage />
+                       {loginStatus ? <Redirect to= "/loginPage" /> : <ProfilePage />}
                     </Route>
                     <Route exact path="/categoryPage">
                         <CategoryPage />
@@ -227,21 +288,18 @@ const deleteUser = (uNum)=>{
                         <GamesPage />
                     </Route>
                     <Route path="/addGame">
-                        <AddGamePage />
+                    {!loginStatus ? <Redirect to= "/loginPage" /> :<AddGamePage />}
                     </Route>
                     <Route path="/loginPage">
-                        <LoginPage />
+                    {loginStatus ? <Redirect to= "/" /> : <LoginPage />}
                     </Route>
                     <Route path="/signupPage">
                         <SignUpPage />
                     </Route>
-<<<<<<< HEAD
                     <Route path="/adminPage">
-                        <AdminPage />
+                    {!user.isAdmin ? <Redirect to= "/loginPage" /> :<AdminPage />}
                     </Route>
-=======
                     <Route path="/game/:id" render={(props) => <GameInfoPage gameId={props.match.params.id} />} />
->>>>>>> c05dfb4da0861a4518fe7523e17626626aa1ef6d
                 </Switch>
             </Router>
             </ModalContext.Provider>

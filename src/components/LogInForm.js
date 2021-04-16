@@ -6,17 +6,17 @@ import GameContext from "../context/GameContext";
 const LogInForm = () => {
  
   const {userLogin} = useContext(GameContext);
-  const [user, setUser] = useState('')
-  const [pass, setPass] = useState('') 
+  const [userForm, setUserForm] = useState('')
+  const [passForm, setPassForm] = useState('') 
 
   const login = ()=>{
       
-      let userObj = {
-          userName: user,
-          password: pass,
+      let Obj = {
+          userName: userForm,
+          password: passForm,
       }
-      console.log(userObj)
-      userLogin(userObj)
+      //console.log(Obj)
+      userLogin(Obj)
       
   }
     return (
@@ -25,10 +25,10 @@ const LogInForm = () => {
                 <div className =  "loginCenter grid"><FaUserCircle style={{fontSize:"110px"}} /></div>
                 
                 <div className = "form-control">
-                    <input type = "text" placeholder = "Username" value = {user} onChange = { (e) => setUser(e.target.value)}/> 
+                    <input type = "text" placeholder = "Username" value = {userForm} onChange = { (e) => setUserForm(e.target.value)}/> 
                 </div>
                 <div className = "form-control">
-                    <input type = "password" placeholder = "Password"  value = {pass} onChange = { (e) => setPass(e.target.value)}  />
+                    <input type = "password" placeholder = "Password"  value = {passForm} onChange = { (e) => setPassForm(e.target.value)}  />
                 </div>
                     
                 <div className =  "row"> 
