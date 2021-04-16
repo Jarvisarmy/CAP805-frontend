@@ -229,28 +229,25 @@ const checkLogin = () =>{
     .then(response=>response.json()).then(result=>{
         console.log(result);
         if(result.loggedIn){
-            let userObj = {
-                userName: result.user.userName,
-                password: result.user.password,
-                firstName: result.user.firstName,
-                lastName : result.user.lastName,
-                email: result.user.email,
-                phoneNum: result.user.phoneNum,
-                address: result.user.address,
-                isAdmin: result.user.isAdmin
-            }
-            console.log(userObj);
+            if (!loginStatus) {
+                let userObj = {
+                    userName: result.user.userName,
+                    password: result.user.password,
+                    firstName: result.user.firstName,
+                    lastName : result.user.lastName,
+                    email: result.user.email,
+                    phoneNum: result.user.phoneNum,
+                    address: result.user.address,
+                    isAdmin: result.user.isAdmin
+                }
+                console.log(userObj);
 
-            setUser((previousState)=>{
-                console.log("set userinfo");
-                previousState = userObj;
-                return previousState;
-            });
-            setLoginStatus(true);
-            console.log(loginStatus);
+                setUser(userObj);
+                setLoginStatus(true);
+            }
         }
         
-        //console.log(loginStatus);
+        console.log(loginStatus);
         console.log(user);
     }).catch(err=>{
         console.log(err)
@@ -271,7 +268,7 @@ const checkLogin = () =>{
 
     return (
         <>         
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout }}>
+        <GameContext.Provider value={{games, user, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout }}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>
@@ -279,7 +276,7 @@ const checkLogin = () =>{
                         <PublicPage />
                     </Route>
                     <Route path="/profilePage">
-                       {loginStatus ? <Redirect to= "/loginPage" /> : <ProfilePage />}
+                       <ProfilePage />
                     </Route>
                     <Route exact path="/categoryPage">
                         <CategoryPage />

@@ -5,11 +5,14 @@ import UserGameEditList from './../components/UserGameEditList';
 import EditProfile from './../components/EditProfile';
 import constant from './../constant.js';
 import './../css/ProfilePage.css';
+import GameContext from './../context/GameContext';
+import {useContext} from 'react';
 import {useState,useEffect} from 'react';
 
 
 
 const ProfilePage = (props) => {
+    const {user} = useContext(GameContext);
     const [searchInput, setSearchInput] = useState("");
     const [games,setGames] = useState([]);
     const [approvedGames, setApprovedGames] = useState([]);
@@ -24,20 +27,19 @@ const ProfilePage = (props) => {
     const [editMadal, setEditMadal] = useState(false);
     const [addMadal, setAddMadal] = useState(false);
     const getUserInfo = ()=>{
+        console.log(user);
         fetch(constant.databaseUrl+'/loginPage', {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify({
-                userName: "jarvis",
-                password: "123456"
+                userName: user.userName,
+                password: user.password
             })
         })
         .then(response=>response.json()).then(result=>{
-            if (result.length !== 0) {
-                setUserInfo(result[0]);
-            }
+            setUserInfo(user);
         })
         .catch(err=>{
             console.log(err);
@@ -82,7 +84,12 @@ const ProfilePage = (props) => {
     useEffect(()=>{
         getGamesByUser();
         getUserInfo();
-    },[]);
+        console.log(user);
+        setUserInfo(user);
+    },[user]);
+    if (user === undefined) {
+        return <p> cannot find the user</p>
+    } else {
     return (
         <>
             <Header/>
@@ -135,7 +142,7 @@ const ProfilePage = (props) => {
             </div>
             
         </>
-    )
+    )}
 }
 
 export default ProfilePage
