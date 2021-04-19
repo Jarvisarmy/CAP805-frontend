@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
 import {useContext} from 'react';
 import GameContext from "../context/GameContext";

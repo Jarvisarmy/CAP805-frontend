@@ -27,7 +27,7 @@ const ProfilePage = (props) => {
     const [editMadal, setEditMadal] = useState(false);
     const [addMadal, setAddMadal] = useState(false);
     const getUserInfo = ()=>{
-        console.log(user);
+       // console.log(user);
         fetch(constant.databaseUrl+'/loginPage', {
             method: 'POST',
             headers: new Headers({

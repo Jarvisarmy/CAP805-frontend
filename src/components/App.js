@@ -143,9 +143,9 @@ function App() {
             body: JSON.stringify(user)
         })
         .then(response=>response.json()).then(result=>{
-            //console.log(result);
+             //console.log(result);
             //console.log(loginStatus);
-            /* let userObj = {
+            let userObj = {
                 userName: result.userName,
                 password: result.password,
                 firstName: result.firstName,
@@ -157,8 +157,9 @@ function App() {
             }
             console.log(userObj);
             setUser(userObj);
-            console.log(user); */
-            checkLogin();
+            console.log(user);  
+            setLoginStatus(true);
+            //checkLogin();
         })
         .catch(err=>{
             console.log(err);
@@ -224,35 +225,34 @@ const userLogout = ()=>{
     });
 }
 
-const checkLogin = () =>{
+ /* const checkLogin = () =>{
     fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
     .then(response=>response.json()).then(result=>{
         console.log(result);
         if(result.loggedIn){
-            if (!loginStatus) {
-                let userObj = {
-                    userName: result.user.userName,
-                    password: result.user.password,
-                    firstName: result.user.firstName,
-                    lastName : result.user.lastName,
-                    email: result.user.email,
-                    phoneNum: result.user.phoneNum,
-                    address: result.user.address,
-                    isAdmin: result.user.isAdmin
-                }
-                console.log(userObj);
-
-                setUser(userObj);
-                setLoginStatus(true);
+            let userObj = {
+                userName: result.user.userName,
+                password: result.user.password,
+                firstName: result.user.firstName,
+                lastName : result.user.lastName,
+                email: result.user.email,
+                phoneNum: result.user.phoneNum,
+                address: result.user.address,
+                isAdmin: result.user.isAdmin
             }
+            console.log(userObj);
+
+            setUser(userObj);
+            setLoginStatus(true);
+            console.log(loginStatus);
         }
         
-        console.log(loginStatus);
+        //console.log(loginStatus);
         console.log(user);
     }).catch(err=>{
         console.log(err)
     });
-}
+}  */
 /* useEffect(()=>{
     checkLogin();
     console.log(user.isAdmin);
@@ -263,12 +263,12 @@ const checkLogin = () =>{
         getAllCategory();
         getUnApprovedGames();
         getAllUsers();
-        checkLogin();
+        //checkLogin();
     },[]);
 
     return (
         <>         
-        <GameContext.Provider value={{games, user, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser }}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>
@@ -285,7 +285,7 @@ const checkLogin = () =>{
                         <GamesPage />
                     </Route>
                     <Route path="/addGame">
-                    {!loginStatus ? <Redirect to= "/loginPage" /> :<AddGamePage />}
+                    <AddGamePage />
                     </Route>
                     <Route path="/loginPage">
                     {loginStatus ? <Redirect to= "/" /> : <LoginPage />}
@@ -294,7 +294,7 @@ const checkLogin = () =>{
                         <SignUpPage />
                     </Route>
                     <Route path="/adminPage">
-                    {!user.isAdmin ? <Redirect to= "/loginPage" /> :<AdminPage />}
+                    <AdminPage />
                     </Route>
                     <Route path="/game/:id" render={(props) => <GameInfoPage gameId={props.match.params.id} />} />
                 </Switch>
