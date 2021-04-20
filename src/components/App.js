@@ -77,12 +77,13 @@ function App() {
     }
 
     const getGamesByCategoryId= (categoryId)=>{
-        fetch(constant.databaseUrl+'/games/category/1')
+        fetch(constant.databaseUrl+'/games/category/'+categoryId)
         .then(response=>response.json())
         .then(result=>{
             console.log(result);
-            setGames(result);
-            storeFilteredGames(games);
+            alert(JSON.stringify(result));
+           // setGames(result);
+            storeFilteredGames(result);
         })
         .catch(err=>{
             console.log(err);
