@@ -81,7 +81,7 @@ function App() {
         .then(response=>response.json())
         .then(result=>{
             console.log(result);
-          
+    
            // setGames(result);
             storeFilteredGames(result);
         })
