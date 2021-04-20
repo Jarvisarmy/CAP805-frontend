@@ -50,7 +50,7 @@ const GameItem = (props) => {
           //  alert("Rating Added successfully")  
           showModalMsg();
          
-         getGamesByCategoryId(props.item.categoryId);
+       //  getGamesByCategoryId(props.item.categoryId);
         
           
     }
@@ -102,7 +102,9 @@ const GameItem = (props) => {
         Rating: {(props.item.rating)}          
          </p>) }
         <br/>
-             
+
+    
+       
     
             {user.userName != "" ? (
             <p className="rate-description" onChange={(evt) => {
