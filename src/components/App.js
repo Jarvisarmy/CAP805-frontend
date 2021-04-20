@@ -75,6 +75,19 @@ function App() {
             console.log(err);
         });
     }
+
+    const getGamesByCategoryId= (categoryId)=>{
+        fetch(constant.databaseUrl+'/games/category/1')
+        .then(response=>response.json())
+        .then(result=>{
+            console.log(result);
+            setGames(result);
+            storeFilteredGames(games);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
     const deleteGame = (gNum)=>{
         fetch(constant.databaseUrl+'/games/delete/'+gNum)
         .then(res=>{
@@ -93,7 +106,7 @@ function App() {
 
       const showModalMsg = () => {
      
-        setPopupModalMessage({"msg":"Rating Added successfully", "visible":true});
+        setPopupModalMessage({"msg":"Thanks for rating the game!!! ", "visible":true});
       }
   
 
@@ -268,7 +281,7 @@ const userLogout = ()=>{
 
     return (
         <>         
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser,getGamesByCategoryId }}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>
