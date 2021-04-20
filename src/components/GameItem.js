@@ -10,13 +10,14 @@ import ModalContext from "../context/ModalContext";
 
 const GameItem = (props) => {
     const { showModalMsg } = useContext(ModalContext);
-    const {user} = useContext(GameContext);
+    const {user,userLogin} = useContext(GameContext);
  
     const [selectedRating, setSelectedRating] = useState("");
    // const [gamesById, setFilteredGames] = useState("");
     
 
   //  alert(JSON.stringify(props));
+  
     const addRating = ()=>{      
              
             const newRating={
@@ -92,7 +93,9 @@ const GameItem = (props) => {
         Rating: {(props.item.rating)}          
          </p>) }
         <br/>
-            {user.userName ==="" ? (
+             
+     
+            {user.userName != "" ? (
             <p className="rate-description" onChange={(evt) => {
             
                 setSelectedRating(evt.target.value);
