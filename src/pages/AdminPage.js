@@ -9,8 +9,9 @@ import {useContext} from 'react';
 import {useState,useEffect} from 'react';
 
 const AdminPage = (props) => {
-    const {user, setUser} = useContext(GameContext);
 
+    const {games} = useContext(GameContext);
+    const {user, setUser, setLoginStatus} = useContext(GameContext);
     const checkLogin = () =>{
         fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
         .then(response=>response.json()).then(result=>{
@@ -27,13 +28,10 @@ const AdminPage = (props) => {
                     isAdmin: result.user.isAdmin
                 }
                 console.log(userObj);
-    
                 setUser(userObj);
-               // setLoginStatus(true);
-                //console.log(loginStatus);
+                setLoginStatus(true);
+                
             }
-            
-            //console.log(loginStatus);
             console.log(user);
         }).catch(err=>{
             console.log(err)
@@ -44,8 +42,9 @@ const AdminPage = (props) => {
         checkLogin();
         console.log(user);
         //setUserInfo(user);
-        setUser(user);
+        
     },[]);
+
     if (user === undefined || user.isAdmin === false) {
         return <p>Cannot Access</p>
     } else {

@@ -9,17 +9,7 @@ import {useContext} from 'react';
 import GameContext from "../context/GameContext";
 const PublicPage = (props) => {
     const {games} = useContext(GameContext);
-    const {user, setUser} = useContext(GameContext);
-
-    /* const [userInfo, setUserInfo] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNum: "",
-        address: "",
-        isAdmin: false
-    }); */
-
+    const {user, setUser, setLoginStatus} = useContext(GameContext);
     const checkLogin = () =>{
         fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
         .then(response=>response.json()).then(result=>{
@@ -36,13 +26,10 @@ const PublicPage = (props) => {
                     isAdmin: result.user.isAdmin
                 }
                 console.log(userObj);
-    
-                setUser(userObj);
-               // setLoginStatus(true);
-                //console.log(loginStatus);
+                setUser(user);
+                setLoginStatus(true);
+                
             }
-            
-            //console.log(loginStatus);
             console.log(user);
         }).catch(err=>{
             console.log(err)

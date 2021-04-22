@@ -1,7 +1,7 @@
 import React from 'react'
 import {useContext} from 'react';
 import GameContext from "../context/GameContext";
-
+import {Link} from "react-router-dom"
 
 
 const Navigation = () => {
@@ -10,6 +10,7 @@ const Navigation = () => {
     console.log(loginStatus);
     const logout = ()=>{
         userLogout();
+        <Link to="/loginPage"></Link>
     }
    // <li><a href="/loginPage"> login/signup</a></li>
     return (
@@ -18,10 +19,10 @@ const Navigation = () => {
         <header>
         <nav>
         <ul>
-            <li><a href="/">Home </a></li> 
-            <li><a href="/profilePage"> Profile </a></li>
-            <li><a href="/categoryPage"> Games</a></li>
-            {!loginStatus ? <li><a href="/loginPage">Login/SignUp </a></li> : <li><button type="button" onClick = {logout} className="btn  login-btn btn-primary" >Log Out</button></li>}
+            <li><Link to = "/">Home</Link></li> 
+            <li><Link to = "/profilePage">Profile</Link></li>
+            <li><Link to = "/categoryPage">Games</Link></li>
+            {!loginStatus ? <li><Link to = "/loginPage">login/signup</Link></li> : <li><button type="button" onClick = {logout} className="btn  login-btn btn-primary" >Log Out</button></li>}
             <li><a href="">Contact </a> </li>
            
 

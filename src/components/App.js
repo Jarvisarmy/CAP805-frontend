@@ -215,15 +215,27 @@ const deleteUser = (uNum)=>{
     
 }
 
-const userLogout = ()=>{
+ const userLogout = ()=>{
     setLoginStatus(false);
     fetch(constant.databaseUrl+'/logout')
     .then(res=>{
+        console.log("Clicked!");
+        window.location.href="/loginPage"; 
     })
     .catch(err=>{
         console.log(err);
     });
-}
+} 
+
+// const userLogout = ()=>{
+//     setLoginStatus(false)
+//     fetch(constant.databaseUrl+'/logout', {
+//         method: 'DELETE',
+//         credentials: 'include',
+//         headers: new Headers({
+//             'Content-Type': 'application/json'
+//         })
+//     }).then(response=>response.json())}
 
  /* const checkLogin = () =>{
     fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
@@ -268,7 +280,7 @@ const userLogout = ()=>{
 
     return (
         <>         
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser, setLoginStatus }}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>
