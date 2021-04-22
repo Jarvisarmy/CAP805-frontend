@@ -107,7 +107,7 @@ function App() {
 
       const showModalMsg = () => {
      
-        setPopupModalMessage({"msg":"Thanks for rating the game!!! ", "visible":true});
+        setPopupModalMessage({"msg":"Thanks for rating the game!!! Your opinion is important to us.", "visible":true});
       }
   
 
