@@ -49,7 +49,7 @@ const GameItem = (props) => {
          
           //  alert("Rating Added successfully")  
           showModalMsg();
-          setTimeout(function(){    getGamesByCategoryId(props.item.categoryId) }, 2000);
+          setTimeout(function(){getGamesByCategoryId(props.item.categoryId) }, 2000);
      
         
           
