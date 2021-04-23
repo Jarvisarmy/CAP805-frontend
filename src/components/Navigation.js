@@ -12,6 +12,7 @@ const Navigation = () => {
     console.log(loginStatus);
     const logout = ()=>{
         userLogout();
+        <Link to="/loginPage"></Link>
     }
    // <li><a href="/loginPage"> login/signup</a></li>
     return (
@@ -24,7 +25,7 @@ const Navigation = () => {
             <li><Link to ="/profilePage"> Profile </Link></li>
             <li><Link to ="/categoryPage"> Games</Link></li>
             {!loginStatus ? <li><Link to="/loginPage">Login/SignUp </Link></li> : <li><button type="button" onClick = {logout} className="btn  login-btn btn-primary" >Log Out</button></li>}
-            <li><a href ="">Contact </a> </li>          
+            <li><Link to="">Contact </Link> </li>          
 
         </ul>
     </nav>

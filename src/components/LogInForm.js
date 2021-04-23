@@ -11,13 +11,18 @@ const LogInForm = () => {
 
   const login = ()=>{
       
+    if(userForm === '' || passForm === ''){
+        alert("please enter the password or username")
+    }
+    else{
       let Obj = {
           userName: userForm,
           password: passForm,
       }
+      
       //console.log(Obj)
       userLogin(Obj)
-      
+    }
   }
     return (
         <div className = "formContainer form-group">

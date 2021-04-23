@@ -5,6 +5,7 @@ import {useContext} from 'react';
 import GameContext from "../context/GameContext";
 import "./../css/ProfilePage.css";
 const AddGame = (props) => {
+    const {userLogin} = useContext(GameContext);
     const [gameCategory,setGameCategory] =useState([]);
     const [gameName, setGameName] = useState("");
     const [gameUrl, setGameUrl] = useState("");
@@ -74,7 +75,7 @@ const AddGame = (props) => {
                 gameDescription: gameDescription,
                 categoryId: parseInt(selectedGameCategory),
                 // let assume all form is added by user 1 first, we can replace this after finish user cookie
-                userNum: 1
+                userNum: parseInt(props.user.userNum)
             }; 
          
             fetch(constant.databaseUrl+'/games/add', {
@@ -98,8 +99,10 @@ const AddGame = (props) => {
                     setGameName("");
                     setGameUrl("");
                     setGameDescription("");
-                    setSelectedGameCategory("");
-                    window.location.href="/profilePage";
+                    setSelectedGameCategory(0);
+                    document.getElementById("selectedGameCategory").value=0;
+                    props.turnOffMadal();
+                    props.refresh();
                 }
             })
             .catch(err=>{

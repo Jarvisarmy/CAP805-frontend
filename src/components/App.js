@@ -43,6 +43,7 @@ function App() {
       });
 
       const [user, setUser] = useState({
+        userNum: "",
         userName : "",
         password : "",
         firstName: "",
@@ -159,21 +160,28 @@ function App() {
         .then(response=>response.json()).then(result=>{
              //console.log(result);
             //console.log(loginStatus);
-            let userObj = {
-                userName: result.userName,
-                password: result.password,
-                firstName: result.firstName,
-                lastName : result.lastName,
-                email: result.email,
-                phoneNum: result.phoneNum,
-                address: result.address,
-                isAdmin: result.isAdmin
-            }
-            console.log(userObj);
-            setUser(userObj);
-            console.log(user);  
-            setLoginStatus(true);
-            //checkLogin();
+            // let userObj = {
+            //     userName: result.userName,
+            //     password: result.password,
+            //     firstName: result.firstName,
+            //     lastName : result.lastName,
+            //     email: result.email,
+            //     phoneNum: result.phoneNum,
+            //     address: result.address,
+            //     isAdmin: result.isAdmin
+            // }
+            // console.log(userObj);
+            // setUser(userObj);
+            // if(user === null ){
+            //     console.log("made it here");
+            //     setLoginStatus(false)
+            // }
+            // else{
+            // console.log(user);  
+            // setLoginStatus(true);
+            // }
+            
+            checkLogin();
         })
         .catch(err=>{
             console.log(err);
@@ -229,22 +237,40 @@ const deleteUser = (uNum)=>{
     
 }
 
-const userLogout = ()=>{
+ const userLogout = ()=>{
     setLoginStatus(false);
-    fetch(constant.databaseUrl+'/logout')
+    fetch(constant.databaseUrl+'/logout',{
+        method: 'GET',
+        credentials: 'include'
+    })
     .then(res=>{
+        console.log("Clicked!");
+        window.location.href="/loginPage"; 
+        checkLogin();
     })
     .catch(err=>{
         console.log(err);
     });
-}
+} 
 
- /* const checkLogin = () =>{
+// const userLogout = ()=>{
+//     setLoginStatus(false)
+//     fetch(constant.databaseUrl+'/logout', {
+//         method: 'DELETE',
+//         credentials: 'include',
+//         headers: new Headers({
+//             'Content-Type': 'application/json'
+//         })
+//     }).then(response=>response.json())}
+
+  const checkLogin = () =>{
     fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
     .then(response=>response.json()).then(result=>{
+        console.log("check login")
         console.log(result);
         if(result.loggedIn){
             let userObj = {
+                userNum: result.user.userNum,
                 userName: result.user.userName,
                 password: result.user.password,
                 firstName: result.user.firstName,
@@ -260,13 +286,17 @@ const userLogout = ()=>{
             setLoginStatus(true);
             console.log(loginStatus);
         }
+        else{
+            setLoginStatus(false);
+            alert("wrong password or user entered");
+        }
         
         //console.log(loginStatus);
         console.log(user);
     }).catch(err=>{
         console.log(err)
     });
-}  */
+}  
 /* useEffect(()=>{
     checkLogin();
     console.log(user.isAdmin);
@@ -280,9 +310,10 @@ const userLogout = ()=>{
         //checkLogin();
     },[]);
 
+
     return (
         <>         
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser,getGamesByCategoryId }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser,getGamesByCategoryId , setLoginStatus}}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>
