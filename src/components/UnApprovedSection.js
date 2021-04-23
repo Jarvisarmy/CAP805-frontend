@@ -4,6 +4,7 @@ import GameContext from "../context/GameContext";
 import ApproveItem from './ApproveItem.js';
 import UserList from './UserList.js';
 import GameItem from './GameItem.js';
+import AdminGameItem from './AdminGameItem.js';
 const UnApprovedSection = () => {
     const {unApprovedGames, deleteGame, deleteUser, approveGame, users, games, filteredGames} = useContext(GameContext);
     return (
@@ -22,7 +23,7 @@ const UnApprovedSection = () => {
 
             <section className="game-list-continer">
              {games.map((game)=>{
-                return <GameItem key={game.gameNum} item={game} onDeleteGame={deleteGame} />
+                return <AdminGameItem key={game.gameNum} item={game} onDeleteGame={deleteGame} />
             })}
         </section>
             
