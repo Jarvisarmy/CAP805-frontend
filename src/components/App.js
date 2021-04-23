@@ -239,10 +239,14 @@ const deleteUser = (uNum)=>{
 
  const userLogout = ()=>{
     setLoginStatus(false);
-    fetch(constant.databaseUrl+'/logout')
+    fetch(constant.databaseUrl+'/logout',{
+        method: 'GET',
+        credentials: 'include'
+    })
     .then(res=>{
         console.log("Clicked!");
         window.location.href="/loginPage"; 
+        checkLogin();
     })
     .catch(err=>{
         console.log(err);
@@ -262,6 +266,7 @@ const deleteUser = (uNum)=>{
   const checkLogin = () =>{
     fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
     .then(response=>response.json()).then(result=>{
+        console.log("check login")
         console.log(result);
         if(result.loggedIn){
             let userObj = {
@@ -303,6 +308,7 @@ const deleteUser = (uNum)=>{
         getAllUsers();
         //checkLogin();
     },[]);
+
 
     return (
         <>         
