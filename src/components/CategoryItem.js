@@ -7,9 +7,13 @@ import GameContext from "../context/GameContext";
 const CategoryItem = (props) => {
     const history = useHistory();
     const goToGamesPage = () => history.push('/games');
-    const { games, storeFilteredGames } = useContext(GameContext);
+    const { games, storeFilteredGames,getAllGames } = useContext(GameContext);
     const categoryId = props.category.categoryId;
     //alert(JSON.stringify(games))
+
+     React.useEffect(()=>{
+        getAllGames();
+    },[]); 
 
     const filterGames = () => {
         const filteredGames = games.filter((g) => {
