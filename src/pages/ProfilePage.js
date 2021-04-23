@@ -48,7 +48,10 @@ const ProfilePage = (props) => {
                 }
                 console.log(userObj);
                 setLoginStatus(true);
-                setUser(userObj);
+                setUser(userObj)
+                setUserInfo(userObj);
+                getGamesByUser(userObj);
+                console.log(userInfo);
             }
             console.log(user);
         }).catch(err=>{
@@ -74,9 +77,9 @@ const ProfilePage = (props) => {
             console.log(err);
         });
     }
-    const getGamesByUser = ()=> {
+    const getGamesByUser = (u)=> {
         console.log(user.userNum);
-        fetch(constant.databaseUrl+'/games?user='+user.userNum)
+        fetch(constant.databaseUrl+'/games?user='+u.userNum)
         .then(response=>response.json())
         .then(result=>{
             setGames(result);
@@ -84,8 +87,6 @@ const ProfilePage = (props) => {
             setApprovedGames(approved);
             var inProgress = result.filter(game=>!game.isApproved);
             setInProgressGames(inProgress);
-            checkLogin();
-            document.getElementById("goback").click();
         })
         .catch(err=>{
             console.log(err);
@@ -116,17 +117,13 @@ const ProfilePage = (props) => {
         setAddMadal(false);
     }
     const refresh = ()=> {
-        getGamesByUser();
+        checkLogin();
 
     }
 
     useEffect(()=>{
         checkLogin();
-        if (loginStatus) {
-            getGamesByUser();
-            setUserInfo(user);
-        }
-    },[loginStatus, user]);
+    },[]);
     if (!loginStatus) {
         return (
             <>
@@ -173,8 +170,8 @@ const ProfilePage = (props) => {
                     }}>
                     </input>
                     <div className="user-games-pane">
-                        <UserGameEditList key={1} refresh={refresh} title="user-review games" lists={inProgressGames} />
-                        <UserGameEditList key={2} refresh={refresh} title="approved games" lists={approvedGames} />
+                        <UserGameEditList key={1} getGames={getGamesByUser} refresh={refresh} title="user-review games" lists={inProgressGames} />
+                        <UserGameEditList key={2} getGames={getGamesByUser} refresh={refresh} title="approved games" lists={approvedGames} />
                     </div>
                 </div>
                 <button className="add-game-button" onClick={()=>{
@@ -182,10 +179,10 @@ const ProfilePage = (props) => {
                 }}>Upload game</button>
             </div> 
             <div className={editMadal ? "edit-profile-container" : "edit-profile-container hidden"}>
-                <EditProfile user={userInfo} turnOffMadal={turnOffMadal}/>
+                <EditProfile refresh={refresh} user={userInfo} turnOffMadal={turnOffMadal}/>
             </div>
             <div className={addMadal ? "add-game-container" : "add-game-container hidden"}>
-                <AddGame user={userInfo} turnOffMadal={turnOffMadal}/>
+                <AddGame refresh={refresh} user={userInfo} turnOffMadal={turnOffMadal}/>
             </div>
             <Link id="goback" className="hidden" to="/profilePage"></Link>
             

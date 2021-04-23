@@ -74,9 +74,11 @@ const EditProfile = (props) => {
             })
             .then(response=>response.json()).then(result=>{
                 console.log(result);
+                console.log(fname);
                 props.turnOffMadal();
                 userLogin(props.user);
-                document.getElementById("editProfile").click();
+                props.refresh();
+                window.location.href="/profilePage";
             })
             .catch(err=>{
                 console.log(err);

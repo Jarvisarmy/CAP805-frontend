@@ -102,7 +102,7 @@ const AddGame = (props) => {
                     setSelectedGameCategory(0);
                     document.getElementById("selectedGameCategory").value=0;
                     props.turnOffMadal();
-                    userLogin(props.user);
+                    props.refresh();
                 }
             })
             .catch(err=>{

@@ -12,11 +12,12 @@ const UserGameEditList = (props) => {
         fetch(constant.databaseUrl+'/games/delete/'+gNum,{
             headers: new Headers({
                 'Content-Type': 'application/json'
-            })
+            }),
+            credentials: 'include'
         })
         .then(res=>{
-            userLogin(props.user);
-            document.getElementById("gsoback").click();
+            console.log("successfully delete");
+            window.location.href="/profilePage";
         })
         .catch(err=>{
             console.log(err);
@@ -25,7 +26,7 @@ const UserGameEditList = (props) => {
     }
     useEffect(()=>{
         setList(props.lists);
-    },[props.lists,props.user])
+    },[props.lists])
     return (
         <div className="user-game-edit-list-contianer">
             <div className="user-game-edit-list-title">{props.title}</div>
