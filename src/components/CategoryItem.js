@@ -13,7 +13,7 @@ const CategoryItem = (props) => {
 
     const filterGames = () => {
         const filteredGames = games.filter((g) => {
-            return g.categoryId == categoryId ;
+            return g.categoryId == categoryId && g.isApproved === true;
         })
         storeFilteredGames(filteredGames)
     }
