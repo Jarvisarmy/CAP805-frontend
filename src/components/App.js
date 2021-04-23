@@ -43,6 +43,7 @@ function App() {
       });
 
       const [user, setUser] = useState({
+        userNum: "",
         userName : "",
         password : "",
         firstName: "",
@@ -159,7 +160,9 @@ function App() {
         .then(response=>response.json()).then(result=>{
              //console.log(result);
             //console.log(loginStatus);
+            console.log(result);
             let userObj = {
+                userNum: result.userNum,
                 userName: result.userName,
                 password: result.password,
                 firstName: result.firstName,
@@ -168,10 +171,8 @@ function App() {
                 phoneNum: result.phoneNum,
                 address: result.address,
                 isAdmin: result.isAdmin
-            }
-            console.log(userObj);
+            };
             setUser(userObj);
-            console.log(user);  
             setLoginStatus(true);
             //checkLogin();
         })
