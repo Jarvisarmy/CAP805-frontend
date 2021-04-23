@@ -11,7 +11,7 @@ import CategoryPage from './../pages/CategoryPage';
 import GamesPage from './../pages/GamesPage';
 import AddGamePage from './../pages/AddGamePage';
 import GameInfoPage from '../pages/GameInfoPage';
-
+import ContactPage from '../pages/ContactPage';
 import action from '../img/action.jpg';
 import adventure from '../img/adventure.jpeg';
 import shooter from '../img/shooter.jpg';
@@ -320,6 +320,7 @@ const deleteUser = (uNum)=>{
                     <Route exact path="/">
                         <PublicPage />
                     </Route>
+                    
                     <Route path="/profilePage">
                        <ProfilePage />
                     </Route>
@@ -331,6 +332,9 @@ const deleteUser = (uNum)=>{
                     </Route>
                     <Route path="/addGame">
                     <AddGamePage />
+                    </Route>
+                    <Route path="/contact">
+                        <ContactPage />
                     </Route>
                     <Route path="/loginPage">
                     {loginStatus ? <Redirect to= "/" /> : <LoginPage />}
