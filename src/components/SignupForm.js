@@ -7,6 +7,7 @@ const SignupForm = () => {
     const [emailCreated, setEmailCreated] = useState("");
     const [firstName, setFirstName] = useState(""); 
     const [lastName, setLastName] = useState("");
+    const [phonenumber, setPhoneNumber] = useState("");
 
     const validateForm = ()=>{
         return true;
@@ -19,6 +20,7 @@ const SignupForm = () => {
                 password: passCreated,
                 firstName : firstName,
                 lastName : lastName,
+                phoneNum: phonenumber,
                 email: emailCreated,
                 isAdmin: false
             }; 
@@ -39,6 +41,7 @@ const SignupForm = () => {
             setFirstName("");
             setLastName("");
             setEmailCreated("");
+            setPhoneNumber("")
             
         }
     }
@@ -65,6 +68,10 @@ const SignupForm = () => {
                 <div class = "form-group">    
                     <label>Email</label>
                     <input type = "email" class = "form-control" placeholder = "Enter Email" value = {emailCreated} onChange = { (e) => setEmailCreated(e.target.value)}/>
+                </div>
+                <div class = "form-group">    
+                    <label>Phone no</label>
+                    <input type = "phonenumber" class = "form-control" placeholder = "Enter Phone no" value = {phonenumber} onChange = { (e) => setPhoneNumber(e.target.value)}/>
                 </div>
                 <div class = "form-group">    
                 <button type="submit"  className="btn  login-btn btn-primary" onClick={addForm} >Sign Up</button>

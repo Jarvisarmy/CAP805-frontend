@@ -10,7 +10,7 @@ import ModalContext from "../context/ModalContext";
 
 const GameItem = (props) => {
     const { showModalMsg } = useContext(ModalContext);
-    const {games,getGamesByCategoryId,user,userLogin} = useContext(GameContext);
+    const {games,getGamesByCategoryId,user,userLogin,loginStatus} = useContext(GameContext);
     const [gamesbyCategory, setGamesBycategory] = useState([]);
     const [selectedRating, setSelectedRating] = useState("");
 
@@ -67,7 +67,7 @@ const GameItem = (props) => {
             console.log(err);
         });
     }
- 
+ //alert (loginStatus)
  
     return (
         <>
@@ -104,7 +104,7 @@ const GameItem = (props) => {
     
        
     
-            {user.userName != "" ? (
+            {loginStatus == true ? (
             <p className="rate-description" onChange={(evt) => {
             
                 setSelectedRating(evt.target.value);
