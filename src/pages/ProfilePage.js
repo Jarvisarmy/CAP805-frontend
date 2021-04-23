@@ -8,11 +8,12 @@ import './../css/ProfilePage.css';
 import GameContext from './../context/GameContext';
 import {useContext} from 'react';
 import {useState,useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 
 
 const ProfilePage = (props) => {
-    const {user} = useContext(GameContext);
+    const {loginStatus, user,userLogin} = useContext(GameContext);
     const [searchInput, setSearchInput] = useState("");
     const [games,setGames] = useState([]);
     const [approvedGames, setApprovedGames] = useState([]);
@@ -46,7 +47,8 @@ const ProfilePage = (props) => {
         });
     }
     const getGamesByUser = ()=> {
-        fetch(constant.databaseUrl+'/games?user=1')
+        console.log(user.userNum);
+        fetch(constant.databaseUrl+'/games?user='+user.userNum)
         .then(response=>response.json())
         .then(result=>{
             setGames(result);
@@ -54,6 +56,7 @@ const ProfilePage = (props) => {
             setApprovedGames(approved);
             var inProgress = result.filter(game=>!game.isApproved);
             setInProgressGames(inProgress);
+            console.log(result);
         })
         .catch(err=>{
             console.log(err);
@@ -74,6 +77,9 @@ const ProfilePage = (props) => {
         }
     }
     const phoneFormat = (p)=>{
+        if (p === undefined) {
+            return "";
+        }
         return p.substring(0,3)+"-"+p.substring(3,6)+"-"+p.substring(6,10);
     }
     const turnOffMadal = () => {
@@ -82,13 +88,20 @@ const ProfilePage = (props) => {
     }
 
     useEffect(()=>{
-        getGamesByUser();
-        getUserInfo();
         console.log(user);
-        setUserInfo(user);
-    },[user]);
-    if (user === undefined) {
-        return <p> cannot find the user</p>
+        if (loginStatus) {
+            getGamesByUser();
+        }
+    },[loginStatus, user]);
+    if (!loginStatus) {
+        return (
+            <>
+                <Header/>
+                <Navigation/>
+                <p> cannot find the user, please <Link to="/loginPage">login</Link></p>
+            </>
+        )
+
     } else {
     return (
         <>
@@ -97,17 +110,17 @@ const ProfilePage = (props) => {
             <div className={editMadal || addMadal ? "user-profile-container disabled":"user-profile-container"}>
                 <div className="user-info-container">
                     <div className="user-name">
-                        {userInfo.firstName + " " + userInfo.lastName}
+                        {user.firstName + " " + user.lastName}
                     </div>
                     <div className="user-info-detail">
                         <div className ="user-info-item">
-                            {userInfo.email}
+                            {user.email}
                         </div>
                         <div className ="user-info-item">
-                            {phoneFormat(userInfo.phoneNum)}
+                            {phoneFormat(user.phoneNum)}
                         </div>
                         <div className="user-info-item">
-                            {userInfo.address}
+                            {user.address}
                         </div>
                         <button className="user-save" onClick={()=>{
                             setEditMadal(true);

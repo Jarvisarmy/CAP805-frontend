@@ -121,7 +121,7 @@ const EditProfile = (props) => {
                 </div>
                 <div className="form-control-container">
                     <label htmlFor="address"> Address </label>
-                    <input className="form-control" type="text" id="lname" value={address} onChange={(event)=>{
+                    <input className="form-control" type="text" id="address" value={address} onChange={(event)=>{
                         setAddress(event.target.value);
                     }}/>
                     <span className="alert-content" >{errorAddress}</span>

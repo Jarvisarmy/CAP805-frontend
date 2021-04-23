@@ -43,6 +43,7 @@ function App() {
       });
 
       const [user, setUser] = useState({
+        userNum: "",
         userName : "",
         password : "",
         firstName: "",
