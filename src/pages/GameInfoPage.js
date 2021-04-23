@@ -4,6 +4,7 @@ import constant from './../constant.js';
 import './../css/ProfilePage.css';
 import GameContext from './../context/GameContext';
 import {useContext} from 'react';
+import {Link} from 'react-router-dom';
 
 
 const GameInfoPage = (props) => {
@@ -58,6 +59,7 @@ const GameInfoPage = (props) => {
                 <p className="game-info-url">Game URL: <a href={game.gameUrl} rel="">{game.gameUrl}</a></p>
                 <p className="game-info-desc">Game Description: {game.gameDescription}</p>
                 <p className="game-info-category">Game Type:{categoryName} </p>
+                <Link className="back-button" to="/profilePage">Back</Link>
             </div>
         )
 }

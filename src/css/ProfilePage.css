@@ -175,3 +175,6 @@ a {
     pointer-events: none;
     opacity: 0.4;
 }
+.back-button {
+    padding-left: 30px;
+}
