@@ -180,8 +180,7 @@ function App() {
             // console.log(user);  
             // setLoginStatus(true);
             // }
-            
-            checkLogin();
+            setTimeout(checkLogin(),2000);
         })
         .catch(err=>{
             console.log(err);
