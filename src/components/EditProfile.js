@@ -2,7 +2,11 @@ import React from 'react';
 import './../css/ProfilePage.css';
 import constant from '../constant';
 import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import GameContext from './../context/GameContext';
+import {useContext} from 'react';
 const EditProfile = (props) => {
+    const {userLogin} = useContext(GameContext);
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
     const [phone, setPhone] = useState("");
@@ -59,8 +63,8 @@ const EditProfile = (props) => {
                     'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify({
-                    userName: "jarvis",
-                    password: "123456",
+                    userName: props.user.userName,
+                    password: props.user.password,
                     firstName: fname,
                     lastName: lname,
                     email: email,
@@ -70,11 +74,14 @@ const EditProfile = (props) => {
             })
             .then(response=>response.json()).then(result=>{
                 console.log(result);
+                props.turnOffMadal();
+                userLogin(props.user);
+                document.getElementById("editProfile").click();
             })
             .catch(err=>{
                 console.log(err);
             });
-            window.location.href="/profilePage";
+            
         }
     }
     const initialize = ()=>{
@@ -132,6 +139,7 @@ const EditProfile = (props) => {
                     <a type="button" onClick={props.turnOffMadal}> cancel</a>
                 </div>
             </form>
+            <Link id="editProfile" to="/profilePage" className="hidden"></Link>
         </section>
     )
 }

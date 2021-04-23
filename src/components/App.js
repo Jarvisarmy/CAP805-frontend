@@ -265,6 +265,7 @@ const deleteUser = (uNum)=>{
         console.log(result);
         if(result.loggedIn){
             let userObj = {
+                userNum: result.user.userNum,
                 userName: result.user.userName,
                 password: result.user.password,
                 firstName: result.user.firstName,
