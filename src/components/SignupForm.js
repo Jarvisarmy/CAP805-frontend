@@ -26,6 +26,7 @@ const SignupForm = () => {
             }; 
             fetch(constant.databaseUrl+'/signupPage', {
                 method: 'POST',
+                credentials: 'include',
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 }),
