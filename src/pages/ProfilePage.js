@@ -107,7 +107,7 @@ const ProfilePage = (props) => {
         }
     }
     const phoneFormat = (p)=>{
-        if (p === undefined) {
+        if (p === undefined || p === null) {
             return "";
         }
         return p.substring(0,3)+"-"+p.substring(3,6)+"-"+p.substring(6,10);
