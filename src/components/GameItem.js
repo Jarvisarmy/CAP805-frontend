@@ -87,7 +87,7 @@ const GameItem = (props) => {
                 */}
              
             </div>
-            <a className="game-url" href={props.item.gameUrl}> {props.item.gameUrl} </a>
+            <a className="game-url" href={props.item.gameUrl} target="_blank"> {props.item.gameUrl} </a>
             <p className="game-description">
                 {props.item.gameDescription}
             </p>
