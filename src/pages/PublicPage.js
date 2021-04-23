@@ -46,8 +46,7 @@ const PublicPage = (props) => {
     return (
         <>
         <Header/>
-        <Navigation/>
-            <GameList list={games} />
+        <Navigation/>          
             <Home/>
             <Footer/>
           

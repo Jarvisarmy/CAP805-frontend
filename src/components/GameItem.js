@@ -10,13 +10,18 @@ import ModalContext from "../context/ModalContext";
 
 const GameItem = (props) => {
     const { showModalMsg } = useContext(ModalContext);
-    const {user} = useContext(GameContext);
- 
+    const {games,getGamesByCategoryId,user,userLogin} = useContext(GameContext);
+    const [gamesbyCategory, setGamesBycategory] = useState([]);
     const [selectedRating, setSelectedRating] = useState("");
+
    // const [gamesById, setFilteredGames] = useState("");
     
 
-  //  alert(JSON.stringify(props));
+    //alert(JSON.stringify(props));
+   // alert(props.item.categoryId);
+
+ 
+  
     const addRating = ()=>{      
              
             const newRating={
@@ -34,7 +39,9 @@ const GameItem = (props) => {
                 body: JSON.stringify(newRating)
             })
             .then(res=>{
-              
+               
+               
+                
             })
             .catch(err=>{
                 console.log(err);
@@ -42,6 +49,9 @@ const GameItem = (props) => {
          
           //  alert("Rating Added successfully")  
           showModalMsg();
+          setTimeout(function(){getGamesByCategoryId(props.item.categoryId) }, 2000);
+     
+        
           
     }
     
@@ -92,17 +102,21 @@ const GameItem = (props) => {
         Rating: {(props.item.rating)}          
          </p>) }
         <br/>
-            {user.userName ==="" ? (
+
+    
+       
+    
+            {user.userName != "" ? (
             <p className="rate-description" onChange={(evt) => {
             
                 setSelectedRating(evt.target.value);
               }}>
               Rate this Game <br/>
-              <input className="radio-rating" type="radio" value="1" name="1" /> 1
-              <input className="radio-rating" type="radio" value="2" name="2" /> 2
-              <input className="radio-rating" type="radio" value="3" name="3" /> 3
-              <input className="radio-rating" type="radio" value="4" name="3" /> 4
-              <input className="radio-rating" type="radio" value="5" name="3" /> 5            
+              <input className="radio-rating" type="radio" value="1" name="rating" /> 1
+              <input className="radio-rating" type="radio" value="2" name="rating" /> 2
+              <input className="radio-rating" type="radio" value="3" name="rating" /> 3
+              <input className="radio-rating" type="radio" value="4" name="rating" /> 4
+              <input className="radio-rating" type="radio" value="5" name="rating" /> 5            
                
             <button className="radio-rating" onClick={addRating}
           >Submit</button>   

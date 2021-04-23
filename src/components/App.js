@@ -75,6 +75,20 @@ function App() {
             console.log(err);
         });
     }
+
+    const getGamesByCategoryId= (categoryId)=>{
+        fetch(constant.databaseUrl+'/games/category/'+categoryId)
+        .then(response=>response.json())
+        .then(result=>{
+            console.log(result);
+    
+           // setGames(result);
+            storeFilteredGames(result);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
     const deleteGame = (gNum)=>{
         fetch(constant.databaseUrl+'/games/delete/'+gNum)
         .then(res=>{
@@ -93,7 +107,7 @@ function App() {
 
       const showModalMsg = () => {
      
-        setPopupModalMessage({"msg":"Rating Added successfully", "visible":true});
+        setPopupModalMessage({"msg":"Thanks for rating the game!!! Your opinion is important to us.", "visible":true});
       }
   
 
@@ -145,21 +159,28 @@ function App() {
         .then(response=>response.json()).then(result=>{
              //console.log(result);
             //console.log(loginStatus);
-            let userObj = {
-                userName: result.userName,
-                password: result.password,
-                firstName: result.firstName,
-                lastName : result.lastName,
-                email: result.email,
-                phoneNum: result.phoneNum,
-                address: result.address,
-                isAdmin: result.isAdmin
-            }
-            console.log(userObj);
-            setUser(userObj);
-            console.log(user);  
-            setLoginStatus(true);
-            //checkLogin();
+            // let userObj = {
+            //     userName: result.userName,
+            //     password: result.password,
+            //     firstName: result.firstName,
+            //     lastName : result.lastName,
+            //     email: result.email,
+            //     phoneNum: result.phoneNum,
+            //     address: result.address,
+            //     isAdmin: result.isAdmin
+            // }
+            // console.log(userObj);
+            // setUser(userObj);
+            // if(user === null ){
+            //     console.log("made it here");
+            //     setLoginStatus(false)
+            // }
+            // else{
+            // console.log(user);  
+            // setLoginStatus(true);
+            // }
+            
+            checkLogin();
         })
         .catch(err=>{
             console.log(err);
@@ -237,7 +258,7 @@ const deleteUser = (uNum)=>{
 //         })
 //     }).then(response=>response.json())}
 
- /* const checkLogin = () =>{
+  const checkLogin = () =>{
     fetch(constant.databaseUrl+ '/login', {credentials: 'include'})
     .then(response=>response.json()).then(result=>{
         console.log(result);
@@ -258,13 +279,17 @@ const deleteUser = (uNum)=>{
             setLoginStatus(true);
             console.log(loginStatus);
         }
+        else{
+            setLoginStatus(false);
+            alert("wrong password or user entered");
+        }
         
         //console.log(loginStatus);
         console.log(user);
     }).catch(err=>{
         console.log(err)
     });
-}  */
+}  
 /* useEffect(()=>{
     checkLogin();
     console.log(user.isAdmin);
@@ -280,7 +305,7 @@ const deleteUser = (uNum)=>{
 
     return (
         <>         
-        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser, setLoginStatus }}>
+        <GameContext.Provider value={{games, getAllGames, deleteGame,gameCategory,storeFilteredGames,filteredGames, userLogin,user, unApprovedGames, approveGame, users, deleteUser, loginStatus, userLogout, setUser,getGamesByCategoryId , setLoginStatus}}>
         <ModalContext.Provider value = {{showModalMsg,popupModaMessage,hidePopupModal}}>
             <Router>
                 <Switch>

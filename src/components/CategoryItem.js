@@ -9,10 +9,11 @@ const CategoryItem = (props) => {
     const goToGamesPage = () => history.push('/games');
     const { games, storeFilteredGames } = useContext(GameContext);
     const categoryId = props.category.categoryId;
+    //alert(JSON.stringify(games))
 
     const filterGames = () => {
         const filteredGames = games.filter((g) => {
-            return g.categoryId == categoryId;
+            return g.categoryId == categoryId ;
         })
         storeFilteredGames(filteredGames)
     }
