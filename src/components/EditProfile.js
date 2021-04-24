@@ -46,7 +46,7 @@ const EditProfile = (props) => {
         } else {
             setErrorPhone("");
         }
-        if (address.length === 0) {
+        if (address !== null && address.length === 0) {
             setErrorAddress("the address cannot be empty");
             isValid= false;
         } else {
